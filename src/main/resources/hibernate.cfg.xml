@@ -1,0 +1,40 @@
+<hibernate-configuration>
+<session-factory>
+<!-- MySQL connection -->
+<property name="hibernate.connection.url"> jdbc:mysql://localhost:3306/java_project_db</property>
+<property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password"><![CDATA[Da45BO&m@v::]]></property>
+
+    <!-- MySQL dialect -->
+    <property name="hibernate.dialect">
+      org.hibernate.dialect.MySQLDialect
+    </property>
+
+    <!-- AUTO-CREATE tables on startup -->
+    <property name="hibernate.hbm2ddl.auto">update</property>
+
+    <!-- Show generated SQL in console -->
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.format_sql">true</property>
+    <!-- Declare your entity classes -->
+    <mapping class="tn.bibliotheque.model.Utilisateur"/>
+    <mapping class="tn.bibliotheque.model.Adherent"/>
+    <mapping class="tn.bibliotheque.model.Bibliothecaire"/>
+    <mapping class="tn.bibliotheque.model.Document"/>
+    <mapping class="tn.bibliotheque.model.Livre"/>
+    <mapping class="tn.bibliotheque.model.Dictionnaire"/>
+    <mapping class="tn.bibliotheque.model.Revue"/>
+    <mapping class="tn.bibliotheque.model.These"/>
+    <mapping class="tn.bibliotheque.model.Pret"/>
+
+
+</session-factory>
+
+
+
+
+
+
+
+
+</hibernate-configuration>
