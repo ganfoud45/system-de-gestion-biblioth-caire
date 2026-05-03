@@ -6,16 +6,22 @@ import tn.bibliotheque.model.Document;
 import tn.bibliotheque.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class PretDAO implements IDAO<Pret> {
 
-    // =====================================================================
-    // Méthodes IDAO
-    // =====================================================================
+    // Liens vers les autres DAOs pour faire les recherches intermédiaires
+    private AdherentDAO adherentDAO = new AdherentDAO();
+    private DocumentDAO documentDAO = new DocumentDAO();
 
-    // Ajouter un nouveau prêt et réduire le nombre d'exemplaires du document
+
+    // =========================================================================
+    // MÉTHODES IDAO
+    // =========================================================================
+
+    // Ajouter un prêt et réduire le nombre d'exemplaires du document
     public void create(Pret p) {
         Transaction tx = null;
         try (Session s = HibernateUtil.getSessionFactory().openSession()) {
@@ -75,13 +81,34 @@ public class PretDAO implements IDAO<Pret> {
         }
     }
 
-    // =====================================================================
-    // Recherche via l'Adhérent
-    // On passe l'objet Adherent déjà trouvé par AdherentDAO
-    // (par nom, cin, email...)
-    // =====================================================================
 
-    // Tous les prêts d'un adhérent avec les détails du document
+    // =========================================================================
+    // RECHERCHE VIA L'ADHÉRENT
+    // adherentDAO cherche l'objet Adherent, puis on cherche ses prêts
+    // =========================================================================
+
+    // Prêts d'un adhérent trouvé par nom et prénom
+    public List<Pret> findByNomAdherent(String nom, String prenom) {
+        List<Adherent> resultats = adherentDAO.rechercherParNomPrenom(nom, prenom);
+        if (resultats.isEmpty()) return new ArrayList<>();
+        return findByAdherent(resultats.get(0));
+    }
+
+    // Prêts d'un adhérent trouvé par son CIN
+    public List<Pret> findByCinAdherent(String cin) {
+        Adherent a = adherentDAO.rechercherParCin(cin);
+        if (a == null) return new ArrayList<>();
+        return findByAdherent(a);
+    }
+
+    // Prêts d'un adhérent trouvé par son email
+    public List<Pret> findByEmailAdherent(String email) {
+        Adherent a = adherentDAO.rechercherParEmail(email);
+        if (a == null) return new ArrayList<>();
+        return findByAdherent(a);
+    }
+
+    // Méthode interne : chercher les prêts d'un objet Adherent avec son document
     public List<Pret> findByAdherent(Adherent a) {
         try (Session s = HibernateUtil.getSessionFactory().openSession()) {
             return s.createQuery(
@@ -92,13 +119,45 @@ public class PretDAO implements IDAO<Pret> {
         }
     }
 
-    // =====================================================================
-    // Recherche via le Document
-    // On passe l'objet Document déjà trouvé par DocumentDAO
-    // (par nomDoc, isbn, issn, auteur...)
-    // =====================================================================
 
-    // Tous les prêts d'un document avec les détails de l'adhérent
+    // =========================================================================
+    // RECHERCHE VIA LE DOCUMENT
+    // documentDAO cherche l'objet Document, puis on cherche ses prêts
+    // =========================================================================
+
+    // Prêts d'un document trouvé par son titre
+    public List<Pret> findByNomDocument(String nom) {
+        List<Document> resultats = documentDAO.rechercherParNom(nom);
+        if (resultats.isEmpty()) return new ArrayList<>();
+        return findByDocument(resultats.get(0));
+    }
+
+    // Prêts d'un livre trouvé par son ISBN
+    public List<Pret> findByISBN(String isbn) {
+        Document d = documentDAO.rechercherParISBN(isbn);
+        if (d == null) return new ArrayList<>();
+        return findByDocument(d);
+    }
+
+    // Prêts d'une revue trouvée par son ISSN
+    public List<Pret> findByISSN(String issn) {
+        Document d = documentDAO.rechercherParISSN(issn);
+        if (d == null) return new ArrayList<>();
+        return findByDocument(d);
+    }
+
+    // Prêts de tous les livres d'un même auteur
+    public List<Pret> findByAuteur(String auteur) {
+        List<Document> documents = documentDAO.rechercherParAuteur(auteur);
+        if (documents.isEmpty()) return new ArrayList<>();
+        List<Pret> tousLesPrets = new ArrayList<>();
+        for (Document d : documents) {
+            tousLesPrets.addAll(findByDocument(d));
+        }
+        return tousLesPrets;
+    }
+
+    // Méthode interne : chercher les prêts d'un objet Document avec son adhérent
     public List<Pret> findByDocument(Document d) {
         try (Session s = HibernateUtil.getSessionFactory().openSession()) {
             return s.createQuery(
@@ -109,17 +168,17 @@ public class PretDAO implements IDAO<Pret> {
         }
     }
 
-    // =====================================================================
-    // Recherche directe sur les attributs du Prêt
-    // =====================================================================
 
-    // Chercher les prêts par statut : "EN_COURS", "CLOTURE", "EN_RETARD"
+    // =========================================================================
+    // RECHERCHE DIRECTE SUR LES ATTRIBUTS DU PRÊT
+    // =========================================================================
+
+    // Chercher par statut : "EN_COURS", "CLOTURE", "EN_RETARD"
     public List<Pret> findByStatut(String statut) {
         try (Session s = HibernateUtil.getSessionFactory().openSession()) {
             return s.createQuery(
                     "SELECT p FROM Pret p " +
-                    "JOIN FETCH p.adherent " +
-                    "JOIN FETCH p.document " +
+                    "JOIN FETCH p.adherent JOIN FETCH p.document " +
                     "WHERE LOWER(p.statut) = LOWER(:statut)",
                     Pret.class)
                     .setParameter("statut", statut)
@@ -127,13 +186,12 @@ public class PretDAO implements IDAO<Pret> {
         }
     }
 
-    // Chercher les prêts par date de prêt exacte
+    // Chercher par date de prêt exacte
     public List<Pret> findByDatePret(Date datePret) {
         try (Session s = HibernateUtil.getSessionFactory().openSession()) {
             return s.createQuery(
                     "SELECT p FROM Pret p " +
-                    "JOIN FETCH p.adherent " +
-                    "JOIN FETCH p.document " +
+                    "JOIN FETCH p.adherent JOIN FETCH p.document " +
                     "WHERE p.datePret = :datePret",
                     Pret.class)
                     .setParameter("datePret", datePret)
@@ -141,13 +199,12 @@ public class PretDAO implements IDAO<Pret> {
         }
     }
 
-    // Chercher les prêts entre deux dates
+    // Chercher les prêts effectués entre deux dates
     public List<Pret> findByPeriode(Date dateDebut, Date dateFin) {
         try (Session s = HibernateUtil.getSessionFactory().openSession()) {
             return s.createQuery(
                     "SELECT p FROM Pret p " +
-                    "JOIN FETCH p.adherent " +
-                    "JOIN FETCH p.document " +
+                    "JOIN FETCH p.adherent JOIN FETCH p.document " +
                     "WHERE p.datePret BETWEEN :dateDebut AND :dateFin",
                     Pret.class)
                     .setParameter("dateDebut", dateDebut)
@@ -161,8 +218,7 @@ public class PretDAO implements IDAO<Pret> {
         try (Session s = HibernateUtil.getSessionFactory().openSession()) {
             return s.createQuery(
                     "SELECT p FROM Pret p " +
-                    "JOIN FETCH p.adherent " +
-                    "JOIN FETCH p.document " +
+                    "JOIN FETCH p.adherent JOIN FETCH p.document " +
                     "WHERE p.dateRetourPrevue < :today " +
                     "AND LOWER(p.statut) != 'cloture'",
                     Pret.class)
@@ -171,13 +227,14 @@ public class PretDAO implements IDAO<Pret> {
         }
     }
 
-    // Les prêts en retard pour un adhérent précis
-    // Appelée après AdherentDAO.rechercherParNomPrenom() / rechercherParCin() ...
-    public List<Pret> findEnRetardByAdherent(Adherent a) {
+    // Prêts en retard d'un adhérent précis, trouvé par son nom
+    public List<Pret> findEnRetardByNomAdherent(String nom, String prenom) {
+        List<Adherent> resultats = adherentDAO.rechercherParNomPrenom(nom, prenom);
+        if (resultats.isEmpty()) return new ArrayList<>();
+        Adherent a = resultats.get(0);
         try (Session s = HibernateUtil.getSessionFactory().openSession()) {
             return s.createQuery(
-                    "SELECT p FROM Pret p " +
-                    "JOIN FETCH p.document " +
+                    "SELECT p FROM Pret p JOIN FETCH p.document " +
                     "WHERE p.adherent = :adh " +
                     "AND p.dateRetourPrevue < :today " +
                     "AND LOWER(p.statut) != 'cloture'",
