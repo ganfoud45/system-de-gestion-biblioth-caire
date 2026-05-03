@@ -48,10 +48,10 @@ public class authentification extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("WELCOME TO OUR LIBRARY ");
+		JLabel lblNewLabel = new JLabel("🎉WELCOME TO OUR LIBRARY🎉 ");
 		lblNewLabel.setForeground(new Color(102, 51, 204));
 		lblNewLabel.setFont(new Font("Serif", Font.BOLD, 30));
-		lblNewLabel.setBounds(225, 10, 453, 74);
+		lblNewLabel.setBounds(207, 10, 511, 74);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("USERNAME");
