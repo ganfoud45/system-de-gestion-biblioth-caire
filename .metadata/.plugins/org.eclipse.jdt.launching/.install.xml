@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <dirs>
+    <entry loc="C:\Program Files\Java\jdk-25.0.2\bin" stamp="1775378093066"/>
     <entry loc="/usr/lib/jvm/java-17-openjdk-amd64" stamp="1770317212191"/>
     <entry loc="/snap/eclipse/132/usr/lib/eclipse/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_21.0.10.v20260205-0638" stamp="1773659368000"/>
     <entry loc="/usr/lib/jvm/jdk-25" stamp="1758207560130"/>
     <entry loc="/usr/lib/jvm/java-11-openjdk-amd64" stamp="1770317209981"/>
+    <entry loc="C:\Program Files\Java\jdk-25.0.2" stamp="1775378095370"/>
     <entry loc="/snap/eclipse/132/usr/lib/eclipse/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_21.0.10.v20260205-0638/jre" stamp="1773659368000"/>
     <entry loc="/usr/lib/jvm/jdk-24.0.2" stamp="1757602878457"/>
 </dirs>
