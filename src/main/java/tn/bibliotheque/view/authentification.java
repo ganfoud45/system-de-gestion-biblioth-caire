@@ -80,6 +80,7 @@ public class Authentification extends JFrame {
 		passwordField.setBounds(338, 184, 242, 28);
 		contentPane.add(passwordField);
 		
+		
 		JButton btnLogin = new JButton("LOG IN");
 		btnLogin.setFont(new Font("Serif", Font.BOLD, 15));
 		btnLogin.addActionListener(new ActionListener() {
@@ -100,35 +101,36 @@ public class Authentification extends JFrame {
 		errorMe.setFont(new Font("Serif", Font.BOLD, 15));
 		errorMe.setBounds(207, 299, 471, 91);
 		contentPane.add(errorMe);
-		btnLogin.addActionListener(e->{
-			String mdpSaisi = new String(passwordField.getPassword());
-			if (login(username.getText(),mdpSaisi)==null) {
-				errorMe.setText("CIN ou mot de passe incorrect.");
-			}
-			else {
-				if(login(username.getText(),mdpSaisi) instanceof Adherent ) {
-					dispose();
-                    SwingUtilities.invokeLater(() -> {
-                        AdherentAcces dash = new AdherentAcces();
-                        dash.setVisible(true);
-				});}
-                    else {
-                    	dispose();
-                    	SwingUtilities.invokeLater(() -> {
-                        	BibliothecaireAcces dash = new BibliothecaireAcces();
-                            dash.setVisible(true);
-                    });
-			}}}
-			
-		);
+		btnLogin.addActionListener(e -> {
+		    String cin = username.getText().trim();
+		    String mdp = new String(passwordField.getPassword());
+		    
+		    Utilisateur user = login(cin, mdp);
+		    
+		    if (user == null) {
+		        errorMe.setText("CIN ou mot de passe incorrect.");
+		    } else if (user instanceof Adherent) {
+		        dispose();
+		        SwingUtilities.invokeLater(() -> {
+		            AdherentAcces dash = new AdherentAcces((Adherent) user);
+		            dash.setVisible(true);
+		        });
+		    } else {
+		        dispose();
+		        SwingUtilities.invokeLater(() -> {
+		            BibliothecaireAcces dash = new BibliothecaireAcces();
+		            dash.setVisible(true);
+		        });
+		    }
+		});
 
 	}
-	public Utilisateur login(String cin , String mdp) {
-		UtilisateurDAO u= new UtilisateurDAO();
-		String mdpSaisi = new String(passwordField.getPassword());
-		if((u.rechercherParCin(cin))!=null && (u.rechercherParCin(cin).getMotDePasse().equals(mdpSaisi))) {
-			return u.rechercherParCin(cin);
-		}
-		return null;
+	public Utilisateur login(String cin, String mdp) {
+	    UtilisateurDAO u = new UtilisateurDAO();
+	    Utilisateur user = u.rechercherParCin(cin);
+	    if (user != null && user.getMotDePasse().equals(mdp)) {
+	        return user;
+	    }
+	    return null;
 	}
 }

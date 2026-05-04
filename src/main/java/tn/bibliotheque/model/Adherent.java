@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 public class Adherent extends Utilisateur {
 	@Column(name="num_abonnement")
-    private int numAbonnement;
+    private Integer numAbonnement;
 
     // Constructors
     public Adherent() {
@@ -17,17 +17,17 @@ public class Adherent extends Utilisateur {
     }
 
     public Adherent(int id, String cin, String nom, String prenom,
-                    String dateNaissance, String email, int numTel,
-                    String motDePasse, int numAbonnement) {
+                    String dateNaissance, String email, Integer numTel,
+                    String motDePasse, Integer numAbonnement) {
         super(id, cin, nom, prenom, dateNaissance, email, numTel, motDePasse);
         this.numAbonnement = numAbonnement;
     }
 
     // Getter
-    public int getNumAbonnement() { return numAbonnement; }
+    public Integer getNumAbonnement() { return numAbonnement; }
 
     // Setter
-    public void setNumAbonnement(int numAbonnement) { this.numAbonnement = numAbonnement; }
+    public void setNumAbonnement(Integer numAbonnement) { this.numAbonnement = numAbonnement; }
 
     @Override
     public String toString() {

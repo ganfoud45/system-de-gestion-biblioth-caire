@@ -28,7 +28,7 @@ public class Pret {
 	@Column(name="dateRetourPrevue")
     private LocalDate dateRetourPrevue;
 	
-	@Column(name="dateRetourReelle")
+	@Column(name="statut")
     private String statut; // "EN_COURS", "RETOURNE", "EN_RETARD"
 
     // Constructeurs

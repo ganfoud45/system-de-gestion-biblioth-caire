@@ -136,6 +136,7 @@ public class PanelAjouterPret extends JPanel {
             nouveauPret.setAdherent(adherentSelectionne);
             nouveauPret.setDocument(documentSelectionne);
             nouveauPret.setDatePret( LocalDate.now()); // Date du jour
+            nouveauPret.setDateRetourPrevue(LocalDate.now().plusWeeks(2));
             nouveauPret.setStatut("EN_COURS");
 
             // 4. Appel au DAO (Ta méthode create gère Hibernate et le stock -1)

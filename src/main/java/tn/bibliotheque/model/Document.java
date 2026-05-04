@@ -28,8 +28,8 @@ public abstract class Document {
 	@Column(name="nbExemplaire")
     private int nbExemplaire;
 	
-	@Column(name="typeDocument")
-    private String type;
+	@Column(name="typeDocument", insertable=false, updatable=false)
+	private String type;
 
     // Constructors
     public Document() {}

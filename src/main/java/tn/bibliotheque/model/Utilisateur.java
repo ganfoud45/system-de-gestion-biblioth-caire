@@ -26,7 +26,7 @@ public abstract class Utilisateur {
 	@Column(name="email")
     private String email;
 	@Column(name="numTel")
-    private int numTel;
+    private Integer numTel;
 	@Column(name="motDePasse")
     private String motDePasse;
 	@Column(name="type")
@@ -36,7 +36,7 @@ public abstract class Utilisateur {
     public Utilisateur() {}
 
     public Utilisateur(int id, String cin, String nom, String prenom,
-                       String dateNaissance, String email, int numTel,
+                       String dateNaissance, String email, Integer numTel,
                        String motDePasse) {
         this.id = id;
         this.cin = cin;
@@ -55,7 +55,7 @@ public abstract class Utilisateur {
     public String getPrenom() { return prenom; }
     public String getDateNaissance() { return dateNaissance; }
     public String getEmail() { return email; }
-    public int getNumTel() { return numTel; }
+    public Integer getNumTel() { return numTel; }
     public String getMotDePasse() { return motDePasse; }
 
     // Setters
@@ -65,7 +65,7 @@ public abstract class Utilisateur {
     public void setPrenom(String prenom) { this.prenom = prenom; }
     public void setDateNaissance(String dateNaissance) { this.dateNaissance = dateNaissance; }
     public void setEmail(String email) { this.email = email; }
-    public void setNumTel(int numTel) { this.numTel = numTel; }
+    public void setNumTel(Integer numTel) { this.numTel = numTel; }
     public void setMotDePasse(String motDePasse) { this.motDePasse = motDePasse; }
 
     @Override

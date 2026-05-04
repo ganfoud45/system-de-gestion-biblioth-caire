@@ -26,13 +26,25 @@ public class PretDAO implements IDAO<Pret> {
         Transaction tx = null;
         try (Session s = HibernateUtil.getSessionFactory().openSession()) {
             tx = s.beginTransaction();
+            
+            // Ré-attacher l'adhérent et le document à la session courante
+            Adherent adherent = s.get(Adherent.class, p.getAdherent().getId());
+            Document document = s.get(Document.class, p.getDocument().getId());
+            
+            p.setAdherent(adherent);
+            p.setDocument(document);
+            
             s.persist(p);
-            p.getDocument().setNbExemplaire(p.getDocument().getNbExemplaire() - 1);
-            s.merge(p.getDocument());
+            
+            // Réduire le stock
+            document.setNbExemplaire(document.getNbExemplaire() - 1);
+            s.merge(document);
+            
             tx.commit();
         } catch (Exception e) {
             if (tx != null) tx.rollback();
             e.printStackTrace();
+            throw e; 
         }
     }
 

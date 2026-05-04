@@ -7,16 +7,19 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import tn.bibliotheque.view.adherent.PanelListeDocuments;
+import tn.bibliotheque.view.adherent.PanelMesEmprunts;
 import tn.bibliotheque.view.adherent.PanelRechercherDocument;
+import tn.bibliotheque.model.Adherent;
 import tn.bibliotheque.view.adherent.PanelEmprunterDocument;
 
 public class AdherentAcces extends JFrame {
-
+	private Adherent adherentConnecte;
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private CardLayout cl;
 
-    public AdherentAcces() {
+    AdherentAcces(Adherent adherent) {  
+        this.adherentConnecte = adherent;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1000, 450);
         setTitle("Espace Adhérent");
@@ -87,5 +90,17 @@ public class AdherentAcces extends JFrame {
 
         // Afficher la liste par défaut
         cl.show(panelAction, "pageListe");
+        lblBonjour.setText("Bonjour, " + adherent.getNom() + " " + adherent.getPrenom() + " !");
+          
+        PanelMesEmprunts pnlEmprunts = new PanelMesEmprunts(adherentConnecte);
+        panelAction.add(pnlEmprunts, "pageEmprunts");
+        
+     
+        JButton btnEmprunts = new JButton("Mes Emprunts");
+        btnEmprunts.setFont(new Font("Serif", Font.BOLD, 12));
+        btnEmprunts.setBounds(0, 270, 172, 50);
+        btnEmprunts.addActionListener(e -> cl.show(panelAction, "pageEmprunts"));
+        panelMenu.add(btnEmprunts);
+    
     }
 }
