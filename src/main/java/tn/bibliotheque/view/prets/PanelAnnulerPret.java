@@ -14,6 +14,7 @@ import tn.bibliotheque.model.Pret;
 
 
 public class PanelAnnulerPret extends JPanel {
+	private PretDAO pretDAO = new PretDAO();
     public PanelAnnulerPret() {
         setLayout(null);
         JLabel lbl = new JLabel("RETOUR / ANNULATION DE PRÊT");
@@ -35,8 +36,14 @@ public class PanelAnnulerPret extends JPanel {
         add(btnValider);
 
         btnValider.addActionListener(e -> {
-            // Logique : PretDAO.delete(Integer.parseInt(txtId.getText()));
-            JOptionPane.showMessageDialog(this, "Document retourné, exemplaire remis en stock !");
+            try {
+                int id = Integer.parseInt(txtId.getText());
+                pretDAO.delete(id); // ← maintenant ça marche car pretDAO est une instance
+                JOptionPane.showMessageDialog(this, "Document retourné, exemplaire remis en stock !");
+                txtId.setText("");
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "ID invalide !");
+            }
         });
     }
 }

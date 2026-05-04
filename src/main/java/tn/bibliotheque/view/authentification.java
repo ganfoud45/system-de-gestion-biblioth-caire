@@ -101,11 +101,12 @@ public class Authentification extends JFrame {
 		errorMe.setBounds(207, 299, 471, 91);
 		contentPane.add(errorMe);
 		btnLogin.addActionListener(e->{
-			if (login(username.getText(),passwordField.getPassword().toString())==null) {
+			String mdpSaisi = new String(passwordField.getPassword());
+			if (login(username.getText(),mdpSaisi)==null) {
 				errorMe.setText("CIN ou mot de passe incorrect.");
 			}
 			else {
-				if(login(username.getText(),passwordField.getPassword().toString()) instanceof Adherent ) {
+				if(login(username.getText(),mdpSaisi) instanceof Adherent ) {
 					dispose();
                     SwingUtilities.invokeLater(() -> {
                         AdherentAcces dash = new AdherentAcces();
@@ -124,7 +125,8 @@ public class Authentification extends JFrame {
 	}
 	public Utilisateur login(String cin , String mdp) {
 		UtilisateurDAO u= new UtilisateurDAO();
-		if((u.rechercherParCin(cin))!=null && (u.rechercherParCin(cin)).getMotDePasse()==mdp) {
+		String mdpSaisi = new String(passwordField.getPassword());
+		if((u.rechercherParCin(cin))!=null && (u.rechercherParCin(cin).getMotDePasse().equals(mdpSaisi))) {
 			return u.rechercherParCin(cin);
 		}
 		return null;

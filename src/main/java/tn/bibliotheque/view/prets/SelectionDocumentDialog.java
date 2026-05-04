@@ -41,7 +41,7 @@ public class SelectionDocumentDialog extends JDialog {
     }
 
     private void chargerDonnees() {
-        String[] colonnes = {"ID", "Titre", "Auteur", "Exemplaires"};
+        String[] colonnes = {"ID", "Titre", "Exemplaires"};
         DefaultTableModel model = new DefaultTableModel(colonnes, 0);
         
         List<Document> documents = docDAO.getAll();
