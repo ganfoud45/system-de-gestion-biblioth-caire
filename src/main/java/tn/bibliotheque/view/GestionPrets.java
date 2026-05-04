@@ -16,9 +16,8 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 public class GestionPrets extends JFrame {
 
@@ -76,7 +75,7 @@ public class GestionPrets extends JFrame {
 		pnlModif.setLayout(null);
 		
 		// --- LABELS ET TITRES ---
-		JLabel lblWelcome = new JLabel("WELCOME :");
+		JLabel lblWelcome = new JLabel("Bonjour:");
 		lblWelcome.setForeground(new Color(0, 0, 204));
 		lblWelcome.setFont(new Font("Serif", Font.BOLD, 18));
 		lblWelcome.setBounds(37, 23, 134, 33);
@@ -85,7 +84,7 @@ public class GestionPrets extends JFrame {
 		JLabel lblNomUtilisateur = new JLabel("Gestionnaire de Bibliothèque");
 		lblNomUtilisateur.setForeground(new Color(102, 0, 255));
 		lblNomUtilisateur.setFont(new Font("Serif", Font.BOLD, 18));
-		lblNomUtilisateur.setBounds(198, 23, 763, 33);
+		lblNomUtilisateur.setBounds(198, 23, 385, 33);
 		contentPane.add(lblNomUtilisateur);
 		
 		// --- PANNEAU DU MENU GAUCHE ---
@@ -95,7 +94,7 @@ public class GestionPrets extends JFrame {
 		panelMenu.setLayout(null);
 		
 		// BOUTON AJOUTER
-		JButton btnajouterP = new JButton("Check out a Document ");
+		JButton btnajouterP = new JButton("Ajouter Pret");
 		btnajouterP.setFont(new Font("Serif", Font.BOLD, 12));
 		btnajouterP.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -106,7 +105,7 @@ public class GestionPrets extends JFrame {
 		panelMenu.add(btnajouterP);
 		
 		// BOUTON ANNULER
-		JButton btnannulerP = new JButton("Check in a Document ");
+		JButton btnannulerP = new JButton("Retourner Pret");
 		btnannulerP.setFont(new Font("Serif", Font.BOLD, 12));
 		btnannulerP.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -117,7 +116,7 @@ public class GestionPrets extends JFrame {
 		panelMenu.add(btnannulerP);
 		
 		// BOUTON MODIFIER
-		JButton btnmodifierP = new JButton("Edit ");
+		JButton btnmodifierP = new JButton("Modifier Pret");
 		btnmodifierP.setFont(new Font("Serif", Font.BOLD, 12));
 		btnmodifierP.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -128,7 +127,7 @@ public class GestionPrets extends JFrame {
 		panelMenu.add(btnmodifierP);
 		
 		// BOUTON VOIR LISTE
-		JButton btnvoirHP = new JButton("Check borrowing records ");
+		JButton btnvoirHP = new JButton("Consulter les prets");
 		btnvoirHP.setFont(new Font("Serif", Font.BOLD, 12));
 		btnvoirHP.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -137,5 +136,17 @@ public class GestionPrets extends JFrame {
 		});
 		btnvoirHP.setBounds(0, 246, 172, 40);
 		panelMenu.add(btnvoirHP);
+		
+		JButton back = new JButton("Retournner");
+		back.setFont(new Font("Serif", Font.BOLD, 13));
+		back.setBounds(576, 28, 122, 27);
+		contentPane.add(back);
+		back.addActionListener(e->{
+			dispose();
+        	SwingUtilities.invokeLater(() -> {
+            	BibliothecaireAcces dash = new BibliothecaireAcces();
+                dash.setVisible(true);
+		});
+		});
 	}
 }

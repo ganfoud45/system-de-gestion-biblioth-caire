@@ -1,18 +1,19 @@
 package tn.bibliotheque.view;
 
-import java.awt.EventQueue;
+
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import tn.bibliotheque.dao.AdherentDAO;
+
 import tn.bibliotheque.dao.UtilisateurDAO;
 import tn.bibliotheque.model.Adherent;
 import tn.bibliotheque.model.Utilisateur;
 
 import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -113,7 +114,7 @@ public class Authentification extends JFrame {
                     else {
                     	dispose();
                     	SwingUtilities.invokeLater(() -> {
-                        	GestionPrets dash = new GestionPrets();
+                        	BibliothecaireAcces dash = new BibliothecaireAcces();
                             dash.setVisible(true);
                     });
 			}}}
