@@ -5,10 +5,17 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import tn.bibliotheque.dao.AdherentDAO;
+import tn.bibliotheque.dao.UtilisateurDAO;
+import tn.bibliotheque.model.Adherent;
+import tn.bibliotheque.model.Utilisateur;
+
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.JTextArea;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -64,34 +71,61 @@ public class Authentification extends JFrame {
 		lblNewLabel_1_1.setBounds(176, 181, 93, 28);
 		contentPane.add(lblNewLabel_1_1);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(338, 118, 242, 28);
-		contentPane.add(textArea);
+		JTextArea username = new JTextArea();
+		username.setBounds(338, 118, 242, 28);
+		contentPane.add(username);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(338, 184, 242, 28);
 		contentPane.add(passwordField);
 		
-		JButton btnNewButton = new JButton("LOG IN");
-		btnNewButton.setFont(new Font("Serif", Font.BOLD, 15));
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnLogin = new JButton("LOG IN");
+		btnLogin.setFont(new Font("Serif", Font.BOLD, 15));
+		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(497, 243, 121, 46);
-		contentPane.add(btnNewButton);
+		btnLogin.setBounds(497, 243, 121, 46);
+		contentPane.add(btnLogin);
 		
 		JButton btnClose = new JButton("CLOSE");
 		btnClose.setFont(new Font("Serif", Font.BOLD, 15));
 		btnClose.setBounds(301, 243, 121, 46);
 		contentPane.add(btnClose);
 		
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel_2.setForeground(new Color(255, 0, 51));
-		lblNewLabel_2.setFont(new Font("Serif", Font.BOLD, 15));
-		lblNewLabel_2.setBounds(207, 299, 471, 91);
-		contentPane.add(lblNewLabel_2);
+		JLabel errorMe = new JLabel("");
+		errorMe.setVerticalAlignment(SwingConstants.TOP);
+		errorMe.setForeground(new Color(255, 0, 51));
+		errorMe.setFont(new Font("Serif", Font.BOLD, 15));
+		errorMe.setBounds(207, 299, 471, 91);
+		contentPane.add(errorMe);
+		btnLogin.addActionListener(e->{
+			if (login(username.getText(),passwordField.getPassword().toString())==null) {
+				errorMe.setText("CIN ou mot de passe incorrect.");
+			}
+			else {
+				if(login(username.getText(),passwordField.getPassword().toString()) instanceof Adherent ) {
+					dispose();
+                    SwingUtilities.invokeLater(() -> {
+                        AdherentAcces dash = new AdherentAcces();
+                        dash.setVisible(true);
+				});}
+                    else {
+                    	dispose();
+                    	SwingUtilities.invokeLater(() -> {
+                        	GestionPrets dash = new GestionPrets();
+                            dash.setVisible(true);
+                    });
+			}}}
+			
+		);
 
+	}
+	public Utilisateur login(String cin , String mdp) {
+		UtilisateurDAO u= new UtilisateurDAO();
+		if((u.rechercherParCin(cin))!=null && (u.rechercherParCin(cin)).getMotDePasse()==mdp) {
+			return u.rechercherParCin(cin);
+		}
+		return null;
 	}
 }

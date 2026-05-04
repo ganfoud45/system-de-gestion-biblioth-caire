@@ -8,7 +8,7 @@ import java.util.List;
 
 public class AdherentDAO implements IDAO<Adherent>{
 	
-	public void create(Adherent a)
+	public  void create(Adherent a)
 	{
 		Transaction tx=null;
 		try(Session s=HibernateUtil.getSessionFactory().openSession()) {
@@ -21,7 +21,7 @@ public class AdherentDAO implements IDAO<Adherent>{
 		}
 	}
 	
-	public void update(Adherent a)
+	public  void update(Adherent a)
 	{
 		Transaction tx=null;
 		try (Session s=HibernateUtil.getSessionFactory().openSession()) {
