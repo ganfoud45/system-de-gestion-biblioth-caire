@@ -119,10 +119,13 @@ public class GestionAdherents extends JFrame {
         contentPane.add(panelBoutons, BorderLayout.SOUTH);
 
        
-        btnRetour.addActionListener(e -> {
-            dispose();
-            SwingUtilities.invokeLater(() -> new Authentification().setVisible(true));
-        });
+        btnRetour.addActionListener(e->{
+			dispose();
+        	SwingUtilities.invokeLater(() -> {
+            	BibliothecaireAcces dash = new BibliothecaireAcces();
+                dash.setVisible(true);
+		});
+		});
         
     }
 

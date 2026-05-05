@@ -1,9 +1,12 @@
 package tn.bibliotheque.view;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 public class GestionDocuments extends JFrame {
@@ -36,6 +39,17 @@ public class GestionDocuments extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		JButton back = new JButton("Retournner");
+		back.setFont(new Font("Serif", Font.BOLD, 13));
+		back.setBounds(576, 28, 122, 27);
+		contentPane.add(back);
+		back.addActionListener(e->{
+			dispose();
+        	SwingUtilities.invokeLater(() -> {
+            	BibliothecaireAcces dash = new BibliothecaireAcces();
+                dash.setVisible(true);
+		});
+		});
 
 	}
 

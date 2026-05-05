@@ -101,6 +101,13 @@ public class AdherentAcces extends JFrame {
         btnEmprunts.setBounds(0, 270, 172, 50);
         btnEmprunts.addActionListener(e -> cl.show(panelAction, "pageEmprunts"));
         panelMenu.add(btnEmprunts);
+        String dateAujourdhui = new java.text.SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date());
+        JLabel lblDate = new JLabel("Aujourd'hui : " + dateAujourdhui, SwingConstants.RIGHT);
+        lblDate.setFont(new Font("Arial", Font.PLAIN, 14));
+        lblDate.setForeground(new Color(0, 0, 139));
+        lblDate.setBounds(431, 20, 300, 30);
+        contentPane.add(lblDate);
+
     
     }
 }

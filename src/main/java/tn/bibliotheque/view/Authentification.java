@@ -74,13 +74,10 @@ public class Authentification extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnLogin.setBounds(497, 243, 121, 46);
+		btnLogin.setBounds(403, 250, 121, 46);
 		contentPane.add(btnLogin);
 		
-		JButton btnClose = new JButton("CLOSE");
-		btnClose.setFont(new Font("Serif", Font.BOLD, 15));
-		btnClose.setBounds(301, 243, 121, 46);
-		contentPane.add(btnClose);
+
 		
 		JLabel errorMe = new JLabel("");
 		errorMe.setVerticalAlignment(SwingConstants.TOP);

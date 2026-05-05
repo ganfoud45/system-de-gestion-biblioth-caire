@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
@@ -54,7 +55,7 @@ public class BibliothecaireAcces extends JFrame {
 		JLabel lblNomUtilisateur = new JLabel("Gestionnaire de Bibliothèque");
 		lblNomUtilisateur.setForeground(new Color(102, 0, 255));
 		lblNomUtilisateur.setFont(new Font("Serif", Font.BOLD, 18));
-		lblNomUtilisateur.setBounds(145, 24, 763, 33);
+		lblNomUtilisateur.setBounds(123, 24, 412, 33);
 		contentPane.add(lblNomUtilisateur);
 		
 		JButton GesDoc = new JButton("Gerer les Documents");
@@ -91,11 +92,18 @@ public class BibliothecaireAcces extends JFrame {
 		JButton btnDeconnexion = new JButton("Déconnexion");
 		btnDeconnexion.setForeground(Color.RED);
 		btnDeconnexion.setFont(new Font("Serif", Font.BOLD, 13));
-		btnDeconnexion.setBounds(538, 10, 150, 30);
+		btnDeconnexion.setBounds(537, 354, 150, 30);
 		btnDeconnexion.addActionListener(e -> {
             dispose();
             SwingUtilities.invokeLater(() -> new Authentification().setVisible(true));
         });
 		contentPane.add(btnDeconnexion);
+		String dateAujourdhui = new java.text.SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date());
+        JLabel lblDate = new JLabel("Aujourd'hui : " + dateAujourdhui, SwingConstants.RIGHT);
+        lblDate.setFont(new Font("Arial", Font.PLAIN, 14));
+        lblDate.setForeground(new Color(0, 0, 139));
+        lblDate.setBounds(403, 27, 300, 30);
+        contentPane.add(lblDate);
+
 	}
 }
