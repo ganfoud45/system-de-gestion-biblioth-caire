@@ -23,7 +23,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Authentification extends JFrame {
+public class authentification extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -36,7 +36,7 @@ public class Authentification extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Authentification frame = new Authentification();
+					authentification frame = new authentification();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,7 +48,7 @@ public class Authentification extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Authentification() {
+	public authentification() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 907, 437);
 		contentPane = new JPanel();
