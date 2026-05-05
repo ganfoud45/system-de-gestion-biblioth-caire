@@ -29,6 +29,7 @@ public class authentification extends JFrame {
 	private JPanel contentPane;
 	private JPasswordField passwordField;
 
+<<<<<<< Updated upstream
 	/**
 	 * Launch the application.
 	 */
@@ -49,6 +50,10 @@ public class authentification extends JFrame {
 	 * Create the frame.
 	 */
 	public authentification() {
+=======
+
+	public Authentification() {
+>>>>>>> Stashed changes
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 907, 437);
 		contentPane = new JPanel();
