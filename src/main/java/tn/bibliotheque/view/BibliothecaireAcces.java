@@ -94,7 +94,7 @@ public class BibliothecaireAcces extends JFrame {
 		btnDeconnexion.setBounds(538, 10, 150, 30);
 		btnDeconnexion.addActionListener(e -> {
             dispose();
-            SwingUtilities.invokeLater(() -> new authentification().setVisible(true));
+            SwingUtilities.invokeLater(() -> new Authentification().setVisible(true));
         });
 		contentPane.add(btnDeconnexion);
 	}

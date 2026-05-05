@@ -3,11 +3,9 @@
 <!-- MySQL connection -->
 <property name="hibernate.connection.url"> jdbc:mysql://localhost:3306/gestionbibliotheque</property>
 <property name="hibernate.connection.username">root</property>
-<<<<<<< Updated upstream
-    <property name="hibernate.connection.password"><![CDATA[****]]></property>
-=======
+
     <property name="hibernate.connection.password">java</property>
->>>>>>> Stashed changes
+
 
     <!-- MySQL dialect -->
     <property name="hibernate.dialect">

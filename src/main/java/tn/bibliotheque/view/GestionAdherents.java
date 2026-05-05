@@ -13,6 +13,7 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.BorderFactory;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.border.EmptyBorder;
@@ -119,7 +120,8 @@ public class GestionAdherents extends JFrame {
 
        
         btnRetour.addActionListener(e -> {
-           dispose(); // fermer cette fenêtre
+            dispose();
+            SwingUtilities.invokeLater(() -> new Authentification().setVisible(true));
         });
         
     }

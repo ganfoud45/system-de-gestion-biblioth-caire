@@ -84,7 +84,7 @@ public class AdherentAcces extends JFrame {
         btnDeconnexion.setBounds(820, 15, 150, 30);
         btnDeconnexion.addActionListener(e -> {
             dispose();
-            SwingUtilities.invokeLater(() -> new authentification().setVisible(true));
+            SwingUtilities.invokeLater(() -> new Authentification().setVisible(true));
         });
         contentPane.add(btnDeconnexion);
 
