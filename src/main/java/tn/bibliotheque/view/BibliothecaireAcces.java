@@ -73,7 +73,7 @@ public class BibliothecaireAcces extends JFrame {
 		contentPane.add(GesAdh);
 		GesAdh.addActionListener(e -> {
 		    dispose();
-		    SwingUtilities.invokeLater(() -> new GestionAdherent().setVisible(true));
+		    SwingUtilities.invokeLater(() -> new GestionAdherents().setVisible(true));
 		});
 		
 		JButton GesPre = new JButton("Gerer les Prets");
@@ -94,7 +94,7 @@ public class BibliothecaireAcces extends JFrame {
 		btnDeconnexion.setBounds(538, 10, 150, 30);
 		btnDeconnexion.addActionListener(e -> {
             dispose();
-            SwingUtilities.invokeLater(() -> new Authentification().setVisible(true));
+            SwingUtilities.invokeLater(() -> new authentification().setVisible(true));
         });
 		contentPane.add(btnDeconnexion);
 	}
