@@ -1,14 +1,11 @@
-package tn.bibliotheque.view;
+package tn.bibliotheque.view.prets;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import tn.bibliotheque.view.prets.PanelAjouterPret;
-import tn.bibliotheque.view.prets.PanelAnnulerPret;
-import tn.bibliotheque.view.prets.PanelListePrets;
-import tn.bibliotheque.view.prets.PanelModifierPret;
+import tn.bibliotheque.view.BibliothecaireView;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -39,7 +36,7 @@ public class GestionPrets extends JFrame {
 	}
 
 	public GestionPrets() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1088, 447);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -144,9 +141,10 @@ public class GestionPrets extends JFrame {
 		back.addActionListener(e->{
 			dispose();
         	SwingUtilities.invokeLater(() -> {
-            	BibliothecaireAcces dash = new BibliothecaireAcces();
+            	BibliothecaireView dash = new BibliothecaireView();
                 dash.setVisible(true);
 		});
 		});
+		
 	}
 }

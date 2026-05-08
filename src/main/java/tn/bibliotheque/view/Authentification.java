@@ -102,7 +102,7 @@ public class Authentification extends JFrame {
 		    } else {
 		        dispose();
 		        SwingUtilities.invokeLater(() -> {
-		            BibliothecaireAcces dash = new BibliothecaireAcces();
+		            BibliothecaireView dash = new BibliothecaireView();
 		            dash.setVisible(true);
 		        });
 		    }
