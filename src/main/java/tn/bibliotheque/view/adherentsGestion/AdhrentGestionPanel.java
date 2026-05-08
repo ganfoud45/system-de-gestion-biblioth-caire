@@ -12,6 +12,7 @@ import java.awt.Font;
 import javax.swing.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.util.Collections;
 import java.util.List;
@@ -28,12 +29,11 @@ public class AdhrentGestionPanel extends JPanel {
 	 */
 	public AdhrentGestionPanel() {
 		setBackground(new Color(245, 255, 250));
-		setLayout(null);
-		
+		setLayout(new BorderLayout());            
 		JSplitPane splitPane = new JSplitPane();
-		splitPane.setBounds(12, 12, 679, 542);
-		splitPane.setDividerLocation(200);
-		add(splitPane);
+		splitPane.setDividerLocation(150);        
+
+		add(splitPane, BorderLayout.CENTER);
 		
 		//-------------------------------création de panel acceuil------------------------------------------------
 		JPanel Acceuil = new JPanel();
@@ -137,7 +137,7 @@ public class AdhrentGestionPanel extends JPanel {
 		
 		
 		conteneur.add(AfficherAdherents,"AFFICHER");
-		conteneur.add(AjouterAdherent,"AJOUTERt");
+		conteneur.add(AjouterAdherent,"AJOUTER");
 		conteneur.add(SupprimerAdherents,"SUPPRIMER");
 		
 		

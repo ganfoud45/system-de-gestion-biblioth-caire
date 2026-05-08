@@ -66,10 +66,11 @@ public class AfficherRevue extends JPanel {
 		enregistrerBtn.setBounds(499, 484, 144, 43);
 		add(enregistrerBtn);
 		
-		JButton annulerBtn = new JButton("annuler");
-		annulerBtn.setFont(new Font("Dialog", Font.BOLD, 16));
-		annulerBtn.setBounds(328, 484, 144, 43);
-		add(annulerBtn);
+		JButton actualiserBtn = new JButton("Actualiser");
+		actualiserBtn.setFont(new Font("Dialog", Font.BOLD, 16));
+		actualiserBtn.setBounds(328, 484, 144, 43);
+		add(actualiserBtn);
+		
 		
 		//--------------listeners-------------------
 		enregistrerBtn.addActionListener(new ActionListener() {
@@ -90,9 +91,8 @@ public class AfficherRevue extends JPanel {
 	                        b.setPeriodicite(model.getValueAt(i, 3).toString());
 	                        b.setNumero(Integer.parseInt(model.getValueAt(i, 4).toString()));
 	                        b.setDatePub(model.getValueAt(i,5).toString());
-	                        b.setNumDoc(Integer.parseInt(model.getValueAt(i, 8).toString()));
-	                        b.setNbExemplaire(Integer.parseInt(model.getValueAt(i, 9).toString()));
-	                        
+	                        b.setNumDoc(Integer.parseInt(model.getValueAt(i, 6).toString()));
+	                        b.setNbExemplaire(Integer.parseInt(model.getValueAt(i, 7).toString()));
 	                        dao.update(a);
 	                    }
 	                }
@@ -106,8 +106,8 @@ public class AfficherRevue extends JPanel {
 	            }
 	        }
 	    });
-				
-		annulerBtn.addActionListener(e -> chargerTable());
+		chargerTable() ;	
+		actualiserBtn.addActionListener(e -> chargerTable());
 
 	}
 	
@@ -119,7 +119,7 @@ public class AfficherRevue extends JPanel {
 
 	    if (liste != null) {
 	        for (Document doc : liste) {
-	            if (doc instanceof Livre) {
+	        	if (doc instanceof Revue)  {
 	                Revue liv = (Revue) doc;
 	                model.addRow(new Object[] {
 	                    liv.getId(),

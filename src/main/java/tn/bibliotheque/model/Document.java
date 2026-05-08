@@ -31,6 +31,8 @@ public abstract class Document {
 	@Column(name="typeDocument", insertable=false, updatable=false)
 	private String type;
 
+	@Column(name = "cheminPhoto")   
+	private String cheminPhoto;
     // Constructors
     public Document() {}
 
@@ -53,6 +55,7 @@ public abstract class Document {
     public boolean isDisponible() { return disponible; }
     public int getNbExemplaire() { return nbExemplaire; }
     public String getType() { return type; }
+    public String getCheminPhoto() { return cheminPhoto; }
 
 
     // Setters
@@ -63,6 +66,7 @@ public abstract class Document {
     public void setDisponible(boolean disponible) { this.disponible = disponible; }
     public void setNbExemplaire(int nbExemplaire) { this.nbExemplaire = nbExemplaire; }
     public void setType(String t) { this.type=t; }
+    public void setCheminPhoto(String cheminPhoto) { this.cheminPhoto = cheminPhoto; }
 
     
     @Override

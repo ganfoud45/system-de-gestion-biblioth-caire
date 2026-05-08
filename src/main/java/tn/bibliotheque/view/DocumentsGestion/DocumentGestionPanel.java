@@ -14,6 +14,7 @@ import java.awt.Font;
 import javax.swing.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.util.Collections;
 import java.util.List;
@@ -29,13 +30,11 @@ public class DocumentGestionPanel extends JPanel {
 	 */
 	public DocumentGestionPanel() {
 		setBackground(new Color(245, 255, 250));
-		setLayout(null);
-		
+		setLayout(new BorderLayout());
+
 		JSplitPane splitPane = new JSplitPane();
-		splitPane.setBounds(12, 12, 679, 542);
-		splitPane.setDividerLocation(200);
-		add(splitPane);
-		
+		splitPane.setDividerLocation(150);
+		add(splitPane, BorderLayout.CENTER);		
 		//-------------------------------création de panel acceuil------------------------------------------------
 		JPanel Acceuil = new JPanel();
 		Acceuil.setLayout(null);
@@ -64,89 +63,84 @@ public class DocumentGestionPanel extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		splitPane.setLeftComponent(panel);
-		 //rechercher adh 
-		JMenu RechercherDoc = new JMenu("Rechercher document");
-		RechercherDoc.setBounds(0, 28, 187, 35);
-		panel.add(RechercherDoc);
-		
+
+		// ========== RECHERCHER ==========
+		JButton btnRechercher = new JButton("Rechercher document");
+		btnRechercher.setBounds(0, 28, 187, 35);
+		panel.add(btnRechercher);
+
+		JPopupMenu popupRechercher = new JPopupMenu();
+
 		JMenuItem mntmParId = new JMenuItem("Par Id");
-		RechercherDoc.add(mntmParId);
-		
+		popupRechercher.add(mntmParId);
+
 		JMenu RechercherLivre = new JMenu("Livre");
-		RechercherLivre.setBounds(0, 28, 187, 35);
-		
 		JMenuItem mntmParMotsClé = new JMenuItem("Par mots clés");
-		RechercherLivre.add(mntmParMotsClé);
-
 		JMenuItem mntmParAuteur = new JMenuItem("Par auteur");
-		RechercherLivre.add(mntmParAuteur);
-		
 		JMenuItem mntmParISBN = new JMenuItem("Par ISBN");
+		RechercherLivre.add(mntmParMotsClé);
+		RechercherLivre.add(mntmParAuteur);
 		RechercherLivre.add(mntmParISBN);
-		
-		RechercherDoc.add(RechercherLivre);
-		
+		popupRechercher.add(RechercherLivre);
+
 		JMenuItem RechercherDict = new JMenuItem("Dictionnaire");
-		RechercherDoc.add(RechercherDict);
-		
 		JMenuItem RechercherRevue = new JMenuItem("Revue");
-		RechercherDoc.add(RechercherRevue);
-		
 		JMenuItem RechercherThese = new JMenuItem("These");
-		RechercherDoc.add(RechercherThese);
-		
-		//---------------------------------afficher doc------------------------------------------------------
-		JMenu AfficherDoc = new JMenu("Afficher documents");
-		AfficherDoc.setBounds(12, 186, 175, 35);
-		
+		popupRechercher.add(RechercherDict);
+		popupRechercher.add(RechercherRevue);
+		popupRechercher.add(RechercherThese);
+
+		btnRechercher.addActionListener(e ->
+		    popupRechercher.show(btnRechercher, 0, btnRechercher.getHeight())
+		);
+
+		// ========== AFFICHER ==========
+		JButton btnAfficher = new JButton("Afficher documents");
+		btnAfficher.setBounds(0, 75, 187, 35);
+		panel.add(btnAfficher);
+
+		JPopupMenu popupAfficher = new JPopupMenu();
 		JMenuItem Dictionnaires = new JMenuItem("Dictionnaires");
-		AfficherDoc.add(Dictionnaires);
-		
-		
 		JMenuItem Livres = new JMenuItem("Livres");
-		AfficherDoc.add(Livres);
-
 		JMenuItem Revues = new JMenuItem("Revues");
-		AfficherDoc.add(Revues);
-		
 		JMenuItem Theses = new JMenuItem("Theses");
-		AfficherDoc.add(Theses);
-		
-		panel.add(AfficherDoc);
+		popupAfficher.add(Dictionnaires);
+		popupAfficher.add(Livres);
+		popupAfficher.add(Revues);
+		popupAfficher.add(Theses);
 
-		
-		//---------------------------------ajouter doc-------------------------------------------------------
-		
-		JMenu AjouterDoc = new JMenu("Ajouter documents");
-		AjouterDoc.setBounds(12, 233, 175, 35);
-		
+		btnAfficher.addActionListener(e ->
+		    popupAfficher.show(btnAfficher, 0, btnAfficher.getHeight())
+		);
+
+		// ========== AJOUTER ==========
+		JButton btnAjouter = new JButton("Ajouter documents");
+		btnAjouter.setBounds(0, 122, 187, 35);
+		panel.add(btnAjouter);
+
+		JPopupMenu popupAjouter = new JPopupMenu();
 		JMenuItem DictionnaireItem = new JMenuItem("Dictionnaire");
-		AjouterDoc.add(DictionnaireItem);
-		
-		
 		JMenuItem LivreItem = new JMenuItem("Livre");
-		AjouterDoc.add(LivreItem);
-
 		JMenuItem RevueItem = new JMenuItem("Revue");
-		AjouterDoc.add(RevueItem);
-		
 		JMenuItem TheseItem = new JMenuItem("These");
-		AjouterDoc.add(TheseItem);
-		
-		panel.add(AjouterDoc);
+		popupAjouter.add(DictionnaireItem);
+		popupAjouter.add(LivreItem);
+		popupAjouter.add(RevueItem);
+		popupAjouter.add(TheseItem);
 
-		
-		//---------------------------------supprimer doc------------------------------------------------------
+		btnAjouter.addActionListener(e ->
+		    popupAjouter.show(btnAjouter, 0, btnAjouter.getHeight())
+		);
+
+		// ========== SUPPRIMER ==========
 		JButton SupprimerDocBttn = new JButton("Supprimer document");
 		SupprimerDocBttn.setFont(new Font("Dialog", Font.BOLD, 11));
-		SupprimerDocBttn.setHorizontalAlignment(SwingConstants.LEFT);
-		SupprimerDocBttn.setBounds(12, 281, 175, 35);
+		SupprimerDocBttn.setBounds(0, 169, 187, 35);
 		panel.add(SupprimerDocBttn);
-		
-		
-		//---------------------------------déconnexion--------------------------------------------------------- 
+
+		// ========== DECONNEXION ==========
 		JButton deconnexion = new JButton("Déconnexion");
-		deconnexion.setBounds(12, 493, 175, 35);
+		deconnexion.setBounds(0, 493, 175, 35);
 		panel.add(deconnexion);
 		
 		//--------------------------------création de cardLayout-----------------------------------------------

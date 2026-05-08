@@ -59,8 +59,8 @@ public class PanelRechercherDocument extends JPanel {
             afficherTous();
             return;
         }
-
         List<Document> resultats;
+        
         String typeRecherche = (String) comboType.getSelectedItem();
 
         switch (typeRecherche) {

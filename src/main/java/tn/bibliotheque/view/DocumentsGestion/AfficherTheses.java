@@ -66,10 +66,11 @@ public class AfficherTheses extends JPanel {
 		enregistrerBtn.setBounds(499, 484, 144, 43);
 		add(enregistrerBtn);
 		
-		JButton annulerBtn = new JButton("annuler");
-		annulerBtn.setFont(new Font("Dialog", Font.BOLD, 16));
-		annulerBtn.setBounds(328, 484, 144, 43);
-		add(annulerBtn);
+		JButton actualiserBtn = new JButton("Actualiser");
+		actualiserBtn.setFont(new Font("Dialog", Font.BOLD, 16));
+		actualiserBtn.setBounds(328, 484, 144, 43);
+		add(actualiserBtn);
+		
 
 	
 
@@ -109,8 +110,9 @@ public class AfficherTheses extends JPanel {
 	            }
 	        }
 	    });
+		chargerTable() ;
 					
-		annulerBtn.addActionListener(e -> chargerTable());
+		actualiserBtn.addActionListener(e -> chargerTable());
 
 }
 		
@@ -123,7 +125,7 @@ public class AfficherTheses extends JPanel {
 		    if (liste != null) {
 		        for (Document doc : liste) {
 		            // On vérifie si c'est bien un Livre avant de faire le cast pour éviter les erreurs
-		            if (doc instanceof Livre) {
+		            if (doc instanceof These) {
 		            	These b=(These ) doc;
 		                model.addRow(new Object[] {
 		                    b.getId(),

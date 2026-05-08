@@ -72,10 +72,10 @@ public class AfficherDictionnaires extends JPanel {
 		enregistrerBtn.setBounds(499, 484, 144, 43);
 		add(enregistrerBtn);
 		
-		JButton annulerBtn = new JButton("annuler");
-		annulerBtn.setFont(new Font("Dialog", Font.BOLD, 16));
-		annulerBtn.setBounds(328, 484, 144, 43);
-		add(annulerBtn);
+		JButton actualiserBtn = new JButton("Actualiser");
+		actualiserBtn.setFont(new Font("Dialog", Font.BOLD, 16));
+		actualiserBtn.setBounds(328, 484, 144, 43);
+		add(actualiserBtn);
 		
 		//------------listeners--------------------------
 		enregistrerBtn.addActionListener(new ActionListener() {
@@ -111,8 +111,8 @@ public class AfficherDictionnaires extends JPanel {
 	            }
 	        }
 	    });
-				
-		annulerBtn.addActionListener(e -> chargerTable());
+		chargerTable() ;
+		actualiserBtn.addActionListener(e -> chargerTable());
 	
 	
 	}
@@ -124,7 +124,7 @@ public class AfficherDictionnaires extends JPanel {
 
 	    if (liste != null) {
 	        for (Document doc : liste) {
-	            if (doc instanceof Livre) {
+	            if (doc instanceof Dictionnaire) {
 	                Dictionnaire a = (Dictionnaire) doc;
 	                model.addRow(new Object[] {
 	                		a.getId(),
@@ -145,8 +145,8 @@ public class AfficherDictionnaires extends JPanel {
 
 	public void chargerTable() {
 	    DocumentDAO dao = new DocumentDAO();
-	    List<Document> listeRevues = dao.rechercherParType("Revue");
-	  	remplirTable(listeRevues);
+	    List<Document> listeDico = dao.rechercherParType("Dictionnaire"); 
+	    remplirTable(listeDico);
 	}		
 	
 

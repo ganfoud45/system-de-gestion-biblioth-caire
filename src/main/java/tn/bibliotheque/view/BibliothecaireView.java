@@ -3,6 +3,7 @@ import  tn.bibliotheque.view.adherentsGestion.*;
 import tn.bibliotheque.view.DocumentsGestion.*;
 import tn.bibliotheque.view.prets.*;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -35,28 +36,25 @@ public class BibliothecaireView extends JFrame {
 	 * Create the frame.
 	 */
 	public BibliothecaireView() {
-		setTitle("Gestion Bibliothèque");
-        setSize(1000, 700);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		contentPane.add(tabbedPane);
-		
-		AdhrentGestionPanel adherentPanel=new AdhrentGestionPanel();
-		DocumentGestionPanel documentPanel=new DocumentGestionPanel();
-		
-		tabbedPane.addTab("Gestion Adhérents",adherentPanel);
-		tabbedPane.addTab("Gestion Documents",documentPanel);
-		
-		//Gestion prets panel
-		
-		
-	}
+	    setTitle("Gestion Bibliothèque");
+	    setSize(1000, 700);
+	    setLocationRelativeTo(null);
+	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+	    contentPane = new JPanel();
+	    contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+	    contentPane.setLayout(new BorderLayout()); 
+	    setContentPane(contentPane);
+
+	    JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+	    contentPane.add(tabbedPane, BorderLayout.CENTER); 
+	    DocumentGestionPanel documentPanel = new DocumentGestionPanel();
+	    GestionPretsPanel pretsPanel = new GestionPretsPanel();
+	    tabbedPane.addTab("Gestion Documents", documentPanel);
+	    tabbedPane.addTab("Gestion Prêts", pretsPanel);
+	    
+	    	    AdhrentGestionPanel adherentPanel = new AdhrentGestionPanel();
+	    	    
+	    	    	    tabbedPane.addTab("Gestion Adhérents", adherentPanel);
+	}
 }

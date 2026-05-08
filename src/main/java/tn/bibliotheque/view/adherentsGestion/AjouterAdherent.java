@@ -109,6 +109,7 @@ public class AjouterAdherent extends JPanel {
 		lblDateDeNaissance.setLabelFor(dateNaissTf);
 		dateNaissTf.setFont(new Font("Dialog", Font.PLAIN, 20));
 		dateNaissTf.setBounds(368, 198, 200, 25);
+		dateNaissTf.setToolTipText("Format : YYYY/MM/DD ex: 2020/03/15");
 		add(dateNaissTf);
 		
 		JFormattedTextField emailTf = new JFormattedTextField();

@@ -87,7 +87,7 @@ public class DocumentDAO implements IDAO<Document> {
     public List<Document> rechercherParType(String type) {
         try (Session s = HibernateUtil.getSessionFactory().openSession()) {
             return s.createQuery(
-                "FROM Document d WHERE TYPE(d) = :type",
+                "FROM Document d WHERE d.type = :type",
                 Document.class)
                 .setParameter("type", type)
                 .list();

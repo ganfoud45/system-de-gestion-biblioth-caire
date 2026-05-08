@@ -72,10 +72,11 @@ public class AfficherLivres extends JPanel {
 		enregistrerBtn.setBounds(499, 484, 144, 43);
 		add(enregistrerBtn);
 		
-		JButton annulerBtn = new JButton("annuler");
-		annulerBtn.setFont(new Font("Dialog", Font.BOLD, 16));
-		annulerBtn.setBounds(328, 484, 144, 43);
-		add(annulerBtn);
+		JButton actualiserBtn = new JButton("Actualiser");
+		actualiserBtn.setFont(new Font("Dialog", Font.BOLD, 16));
+		actualiserBtn.setBounds(328, 484, 144, 43);
+		add(actualiserBtn);
+		
 		
 		enregistrerBtn.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
@@ -112,8 +113,8 @@ public class AfficherLivres extends JPanel {
 	            }
 	        }
 	    });
-				
-		annulerBtn.addActionListener(e -> chargerTable());
+		chargerTable() ;
+		actualiserBtn.addActionListener(e -> chargerTable());
 	
 
 	}

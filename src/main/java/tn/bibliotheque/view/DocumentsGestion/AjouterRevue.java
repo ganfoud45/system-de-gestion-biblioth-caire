@@ -105,6 +105,7 @@ public class AjouterRevue extends JPanel {
 		lblDatePublication.setLabelFor(datePubTf);
 		datePubTf.setFont(new Font("Dialog", Font.PLAIN, 20));
 		datePubTf.setBounds(368, 318, 200, 25);
+		datePubTf.setToolTipText("Format : YYYY/MM/DD ex: 2020/03/15");
 		add(datePubTf);
 		
 		JFormattedTextField nbreExempTf = new JFormattedTextField();

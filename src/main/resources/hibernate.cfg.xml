@@ -3,7 +3,7 @@
 <!-- MySQL connection -->
 <property name="hibernate.connection.url"> jdbc:mysql://localhost:3306/gestionbibliotheque</property>
 <property name="hibernate.connection.username">root</property>
-<property name="hibernate.connection.password"><![CDATA[Da45BO&m@v::]]></property>
+<property name="hibernate.connection.password">java</property>
 
 
     <!-- MySQL dialect -->
