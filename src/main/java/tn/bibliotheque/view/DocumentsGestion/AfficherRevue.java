@@ -66,10 +66,10 @@ public class AfficherRevue extends JPanel {
 		enregistrerBtn.setBounds(499, 484, 144, 43);
 		add(enregistrerBtn);
 		
-		JButton actualiserBtn = new JButton("Actualiser");
-		actualiserBtn.setFont(new Font("Dialog", Font.BOLD, 16));
-		actualiserBtn.setBounds(328, 484, 144, 43);
-		add(actualiserBtn);
+		JButton annulerBtn = new JButton("Actualiser");
+		annulerBtn.setFont(new Font("Dialog", Font.BOLD, 16));
+		annulerBtn.setBounds(328, 484, 144, 43);
+		add(annulerBtn);
 		
 		
 		//--------------listeners-------------------
@@ -98,6 +98,7 @@ public class AfficherRevue extends JPanel {
 	                }
 
 	                JOptionPane.showMessageDialog(null, "Toutes les modifications ont été enregistrées avec succès !");
+	                chargerTable();
 	                
 	            } catch (Exception ex) {
 	                JOptionPane.showMessageDialog(null, "Erreur lors de l'enregistrement : " + ex.getMessage(), 
@@ -107,7 +108,7 @@ public class AfficherRevue extends JPanel {
 	        }
 	    });
 		chargerTable() ;	
-		actualiserBtn.addActionListener(e -> chargerTable());
+		annulerBtn.addActionListener(e -> chargerTable());
 
 	}
 	

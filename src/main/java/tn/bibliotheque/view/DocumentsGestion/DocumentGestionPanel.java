@@ -152,7 +152,7 @@ public class DocumentGestionPanel extends JPanel {
 		
 		JPanel AfficherDictionnaires = new AfficherDictionnaires ();
 		JPanel AfficherLivres = new AfficherLivres ();
-		JPanel AfficherRevues = new AfficherLivres ();
+		JPanel AfficherRevues = new AfficherRevue ();
 		JPanel AfficherTheses = new AfficherTheses ();
 		JPanel AjouterDictionnaire = new AjouterDictionnaire();
 		JPanel AjouterLivre = new AjouterLivre();

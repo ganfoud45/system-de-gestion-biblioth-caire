@@ -81,15 +81,18 @@ public class AdhrentGestionPanel extends JPanel {
 		panel.setLayout(null);
 		splitPane.setLeftComponent(panel);
 		 //rechercher adh 
-		JMenu RechercherAdh = new JMenu("Rechercher adhérent");
-		RechercherAdh.setBounds(0, 28, 187, 35);
-		panel.add(RechercherAdh);
-		
+		JPopupMenu popupRecherche = new JPopupMenu();
 		JMenuItem mntmParCin = new JMenuItem("Par cin");
-		RechercherAdh.add(mntmParCin);
-		
 		JMenuItem mntmParEmail = new JMenuItem("Par email");
-		RechercherAdh.add(mntmParEmail);
+		popupRecherche.add(mntmParCin);
+		popupRecherche.add(mntmParEmail);
+
+		JButton btnRechercherAdh = new JButton("Rechercher adhérent");
+		btnRechercherAdh.setBounds(0, 28, 175, 35);
+		btnRechercherAdh.addActionListener(e -> 
+		    popupRecherche.show(btnRechercherAdh, 0, btnRechercherAdh.getHeight())
+		);
+		panel.add(btnRechercherAdh);
 		
 		JButton btnRechercher = new JButton("Rechercher");
 		btnRechercher.setBounds(185, 447, 117, 25);

@@ -51,8 +51,27 @@ public class PanelListePrets extends JPanel {
                 p.getDatePret(),
                 p.getStatut()
             });
+        
         }
         table.setModel(model);
+        table.setDefaultRenderer(Object.class, new javax.swing.table.DefaultTableCellRenderer() {
+            @Override
+            public java.awt.Component getTableCellRendererComponent(
+                    JTable t, Object value, boolean isSelected, boolean hasFocus, int row, int col) {
+                super.getTableCellRendererComponent(t, value, isSelected, hasFocus, row, col);
+                String statut = (String) t.getValueAt(row, 4);
+                if (!isSelected) {
+                    if ("EN_RETARD".equals(statut)) {
+                        setBackground(new Color(255, 200, 200)); // Rouge clair
+                    } else if ("RETOURNE".equals(statut)) {
+                        setBackground(new Color(200, 255, 200)); // Vert clair
+                    } else {
+                        setBackground(Color.WHITE);
+                    }
+                }
+                return this;
+            }
+        });
     }
     
 }
