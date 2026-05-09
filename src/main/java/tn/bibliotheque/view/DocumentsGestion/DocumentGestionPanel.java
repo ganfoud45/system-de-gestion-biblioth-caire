@@ -150,32 +150,27 @@ public class DocumentGestionPanel extends JPanel {
 		splitPane.setRightComponent(conteneur);
 
 		
-		JPanel AfficherDictionnaires = new AfficherDictionnaires ();
-		JPanel AfficherLivres = new AfficherLivres ();
-		JPanel AfficherRevues = new AfficherRevue ();
-		JPanel AfficherTheses = new AfficherTheses ();
-		JPanel AjouterDictionnaire = new AjouterDictionnaire();
-		JPanel AjouterLivre = new AjouterLivre();
-		JPanel AjouterRevue = new AjouterRevue();
-		JPanel AjouterThese = new AjouterThese();
+		
+		AfficherDictionnaires panelAfficherDict = new AfficherDictionnaires();
+		AfficherLivres        panelAfficherLiv  = new AfficherLivres();
+		AfficherRevue         panelAfficherRev  = new AfficherRevue();
+		AfficherTheses        panelAfficherThes = new AfficherTheses();
+		AjouterDictionnaire   AjouterDictionnaire = new AjouterDictionnaire();
+		AjouterLivre          AjouterLivre        = new AjouterLivre();
+		AjouterRevue          AjouterRevue        = new AjouterRevue();
+		AjouterThese          AjouterThese        = new AjouterThese();
+		SupprimerDocument     SupprimerDocument   = new SupprimerDocument();
 
-		JPanel SupprimerDocument = new SupprimerDocument();
-		
-		conteneur.add(Acceuil,"ACCEUIL");
-		
-		conteneur.add(AfficherDictionnaires,"AFFICHERDICT");
-		conteneur.add(AfficherLivres,"AFFICHERLIV");
-		conteneur.add(AfficherRevues,"AFFICHERREV");
-		conteneur.add(AfficherTheses,"AFFICHERTHES");
-		
+		conteneur.add(Acceuil,            "ACCEUIL");
+		conteneur.add(panelAfficherDict,  "AFFICHERDICT");
+		conteneur.add(panelAfficherLiv,   "AFFICHERLIV");
+		conteneur.add(panelAfficherRev,   "AFFICHERREV");
+		conteneur.add(panelAfficherThes,  "AFFICHERTHES");
 		conteneur.add(AjouterDictionnaire,"AJOUTERDIC");
-		conteneur.add(AjouterLivre,"AJOUTERLIV");
-		conteneur.add(AjouterRevue,"AJOUTERREV");
-		conteneur.add(AjouterThese,"AJOUTERTHES");
-		
-		conteneur.add(SupprimerDocument,"SUPPRIMER");
-		
-
+		conteneur.add(AjouterLivre,       "AJOUTERLIV");
+		conteneur.add(AjouterRevue,       "AJOUTERREV");
+		conteneur.add(AjouterThese,       "AJOUTERTHES");
+		conteneur.add(SupprimerDocument,  "SUPPRIMER");
 
 		
 		//--------------------------------Ajout des listeners-----------------------------------
@@ -211,173 +206,109 @@ public class DocumentGestionPanel extends JPanel {
 		});
 		
 		mntmParId.addActionListener(e -> {
-
-		    String idText = JOptionPane.showInputDialog(
-		            "Entrer l'id du document");
-
-		    if(idText != null && !idText.trim().isEmpty()) {
-
+		    String idText = JOptionPane.showInputDialog("Entrer l'id du document");
+		    if (idText != null && !idText.trim().isEmpty()) {
 		        try {
-
 		            int id = Integer.parseInt(idText);
 		            DocumentDAO dao = new DocumentDAO();
 		            Document doc = dao.findById(id);
-		            if(doc != null) {
-		                // ---------------- LIVRE ----------------
-		                if(doc instanceof Livre) {
-		                    AfficherLivres panel1 =new AfficherLivres();
-		                    panel1.remplirTable(Collections.singletonList(doc));
+		            if (doc != null) {
+		                if (doc instanceof Livre) {
+		                    panelAfficherLiv.remplirTable(Collections.singletonList(doc));
 		                    cardLayout.show(conteneur, "AFFICHERLIV");
-		                }
-		                // ---------------- DICTIONNAIRE ----------------
-		                else if(doc instanceof Dictionnaire) {
-		                    AfficherDictionnaires panel2 = new AfficherDictionnaires();
-		                    panel2.remplirTable(Collections.singletonList(doc));
-		                    cardLayout.show(conteneur,"AFFICHERDICT");
-		                }
-		                // ---------------- REVUE ----------------
-		                else if(doc instanceof Revue) {
-		                    AfficherRevue panel3 = new AfficherRevue();
-		                    panel3.remplirTable(Collections.singletonList(doc));
-		                    cardLayout.show(conteneur,"AFFICHERREV");
-		                }
-		                // ---------------- THESE ----------------
-		                else if(doc instanceof These) {
-		                    AfficherTheses panel4 = new AfficherTheses();
-		                    panel4.remplirTable(Collections.singletonList(doc));
-		                    cardLayout.show(conteneur,"AFFICHERTHES");
+		                } else if (doc instanceof Dictionnaire) {
+		                    panelAfficherDict.remplirTable(Collections.singletonList(doc));
+		                    cardLayout.show(conteneur, "AFFICHERDICT");
+		                } else if (doc instanceof Revue) {
+		                    panelAfficherRev.remplirTable(Collections.singletonList(doc));
+		                    cardLayout.show(conteneur, "AFFICHERREV");
+		                } else if (doc instanceof These) {
+		                    panelAfficherThes.remplirTable(Collections.singletonList(doc));
+		                    cardLayout.show(conteneur, "AFFICHERTHES");
 		                }
 		            } else {
-		                JOptionPane.showMessageDialog( null,"Aucun document trouvé");
+		                JOptionPane.showMessageDialog(null, "Aucun document trouvé");
 		            }
-
-		        } catch(NumberFormatException ex) {
-		            JOptionPane.showMessageDialog(null,"Id invalide");
+		        } catch (NumberFormatException ex) {
+		            JOptionPane.showMessageDialog(null, "Id invalide");
 		        }
 		    }
 		});
-		
+
 		mntmParMotsClé.addActionListener(e -> {
 		    String mots = JOptionPane.showInputDialog("Entrer les mots clés :");
 		    if (mots != null && !mots.trim().isEmpty()) {
-		        DocumentDAO dao = new DocumentDAO();
-		        List<Document> res = dao.rechercherParMotsCle(mots);
-		        
-		        if (res != null) {
-		        	 AfficherLivres afficherLivre = new AfficherLivres();
-		        	 afficherLivre.remplirTable(res);
-		                cardLayout.show(conteneur, "AFFICHERLIV");
-		                
+		        List<Document> res = new DocumentDAO().rechercherParMotsCle(mots);
+		        if (res != null && !res.isEmpty()) {
+		            panelAfficherLiv.remplirTable(res);
+		            cardLayout.show(conteneur, "AFFICHERLIV");
 		        } else {
 		            JOptionPane.showMessageDialog(null, "Aucun document trouvé.");
 		        }
 		    }
 		});
-		
+
 		mntmParAuteur.addActionListener(e -> {
 		    String auteur = JOptionPane.showInputDialog("Entrer l'auteur :");
 		    if (auteur != null && !auteur.trim().isEmpty()) {
-		        DocumentDAO dao = new DocumentDAO();
-		        List<Document> res = dao.rechercherParAuteur(auteur);
-		        
-		        if (res != null) {
-		        	 AfficherLivres afficherLivre = new AfficherLivres();
-		        	 afficherLivre.remplirTable(res);
-		                cardLayout.show(conteneur, "AFFICHERLIV");
-		                
+		        List<Document> res = new DocumentDAO().rechercherParAuteur(auteur);
+		        if (res != null && !res.isEmpty()) {
+		            panelAfficherLiv.remplirTable(res);
+		            cardLayout.show(conteneur, "AFFICHERLIV");
 		        } else {
 		            JOptionPane.showMessageDialog(null, "Aucun document trouvé.");
 		        }
 		    }
 		});
-		
+
 		mntmParISBN.addActionListener(e -> {
 		    String isbn = JOptionPane.showInputDialog("Entrer l'ISBN :");
 		    if (isbn != null && !isbn.trim().isEmpty()) {
-		        DocumentDAO dao = new DocumentDAO();
-		        Document res = dao.rechercherParISBN(isbn);
-		        
+		        Document res = new DocumentDAO().rechercherParISBN(isbn);
 		        if (res != null) {
-		        	AfficherLivres panel1 =new AfficherLivres();
-                    panel1.remplirTable(Collections.singletonList(res));
-                    cardLayout.show(conteneur, "AFFICHERLIV");
-		                
+		            panelAfficherLiv.remplirTable(Collections.singletonList(res));
+		            cardLayout.show(conteneur, "AFFICHERLIV");
 		        } else {
 		            JOptionPane.showMessageDialog(null, "Aucun document trouvé.");
 		        }
 		    }
 		});
+
 		RechercherDict.addActionListener(e -> {
 		    String lgSource = JOptionPane.showInputDialog("Entrer la langue source");
-		    
-		    String lgCible = JOptionPane.showInputDialog("Entrer la langue cible");
-
-		    if(lgSource != null && lgCible != null) {
-		        DocumentDAO dao = new DocumentDAO();
-		        List<Document> resultat =dao.rechercherParLangue(lgSource,lgCible);
-
-		        if(!resultat.isEmpty()) {
-
-		            AfficherDictionnaires panel1 =new AfficherDictionnaires();
-
-		            panel1.remplirTable(resultat);
-
-		            cardLayout.show(conteneur,"AFIICHERDIC");
-
+		    String lgCible  = JOptionPane.showInputDialog("Entrer la langue cible");
+		    if (lgSource != null && lgCible != null) {
+		        List<Document> resultat = new DocumentDAO().rechercherParLangue(lgSource, lgCible);
+		        if (!resultat.isEmpty()) {
+		            panelAfficherDict.remplirTable(resultat);
+		            cardLayout.show(conteneur, "AFFICHERDICT"); // ← faute de frappe corrigée
 		        } else {
-
-		            JOptionPane.showMessageDialog(null,"Aucun dictionnaire trouvé");
-		        }
-		    }
-		});	
-		
-		RechercherRevue.addActionListener(e -> {
-			
-		    String issn = JOptionPane.showInputDialog( "Entrer ISSN");
-		    
-		    if(issn != null && !issn.trim().isEmpty()) {
-
-		        DocumentDAO dao = new DocumentDAO();
-
-		        Document res =dao.rechercherParISSN(issn);
-
-		        if(res != null) {
-
-		            List<Document> resultat =Collections.singletonList(res);
-
-		            AfficherRevue panel1 =new AfficherRevue();
-
-		            panel1.remplirTable(resultat);
-
-		            cardLayout.show(conteneur,"AFFICHERREV");
-
-		        } else {
-
-		            JOptionPane.showMessageDialog(null,"Aucune revue trouvée");
+		            JOptionPane.showMessageDialog(null, "Aucun dictionnaire trouvé");
 		        }
 		    }
 		});
-		
-		RechercherThese.addActionListener(e -> {
 
-		    String domaine = JOptionPane.showInputDialog("Entrer domaine de soutenance");
-
-		    if(domaine != null &&!domaine.trim().isEmpty()) {
-
-		        DocumentDAO dao = new DocumentDAO();
-
-		        List<Document> resultat =dao.rechercherParDomaineSoutenance(domaine);
-
-		        if(!resultat.isEmpty()) {
-
-		            AfficherTheses panel1 =new AfficherTheses();
-
-		            panel1.remplirTable(resultat);
-
-		            cardLayout.show(conteneur, "AFFICHERTHES");
-
+		RechercherRevue.addActionListener(e -> {
+		    String issn = JOptionPane.showInputDialog("Entrer ISSN");
+		    if (issn != null && !issn.trim().isEmpty()) {
+		        Document res = new DocumentDAO().rechercherParISSN(issn);
+		        if (res != null) {
+		            panelAfficherRev.remplirTable(Collections.singletonList(res));
+		            cardLayout.show(conteneur, "AFFICHERREV");
 		        } else {
+		            JOptionPane.showMessageDialog(null, "Aucune revue trouvée");
+		        }
+		    }
+		});
 
+		RechercherThese.addActionListener(e -> {
+		    String domaine = JOptionPane.showInputDialog("Entrer domaine de soutenance");
+		    if (domaine != null && !domaine.trim().isEmpty()) {
+		        List<Document> resultat = new DocumentDAO().rechercherParDomaineSoutenance(domaine);
+		        if (!resultat.isEmpty()) {
+		            panelAfficherThes.remplirTable(resultat);
+		            cardLayout.show(conteneur, "AFFICHERTHES");
+		        } else {
 		            JOptionPane.showMessageDialog(null, "Aucune thèse trouvée");
 		        }
 		    }

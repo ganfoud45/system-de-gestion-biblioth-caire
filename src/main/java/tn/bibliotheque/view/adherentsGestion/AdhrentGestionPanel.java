@@ -132,23 +132,19 @@ public class AdhrentGestionPanel extends JPanel {
 		splitPane.setRightComponent(conteneur);
 
 		
-		JPanel AfficherAdherents = new AfficherAdherentsPanel();
+		AfficherAdherentsPanel panelAfficher = new AfficherAdherentsPanel();
 		JPanel SupprimerAdherents = new SupprimerAdherentPanel();
-		JPanel AjouterAdherent = new AjouterAdherent();
+		JPanel AjouterAdherent    = new AjouterAdherent();
 
-		conteneur.add(Acceuil,"ACCEUIL");
-		
-		
-		conteneur.add(AfficherAdherents,"AFFICHER");
-		conteneur.add(AjouterAdherent,"AJOUTER");
+		conteneur.add(Acceuil,          "ACCEUIL");
+		conteneur.add(panelAfficher,    "AFFICHER");
+		conteneur.add(AjouterAdherent,  "AJOUTER");
 		conteneur.add(SupprimerAdherents,"SUPPRIMER");
 		
 		
 		//--------------------------------Ajout des listeners-----------------------------------
 		
-		afficherAdhBttn.addActionListener(e -> {
-			cardLayout.show(conteneur,"AFFICHER");
-		});
+	
 		
 		AjouterAdhBttn.addActionListener(e -> {
 			cardLayout.show(conteneur,"AJOUTER");
@@ -158,82 +154,57 @@ public class AdhrentGestionPanel extends JPanel {
 			cardLayout.show(conteneur,"SUPPRIMER");
 			
 		});
+		
+		afficherAdhBttn.addActionListener(e -> {
+		    panelAfficher.chargerTable(); // recharge toute la liste
+		    cardLayout.show(conteneur, "AFFICHER");
+		});
+
 		mntmParCin.addActionListener(e -> {
 		    String cin = JOptionPane.showInputDialog("Entrez le CIN :");
 		    if (cin != null && !cin.trim().isEmpty()) {
-		        AdherentDAO dao = new AdherentDAO();
-		        Adherent res = dao.rechercherParCin(cin);
-		        
+		        Adherent res = new AdherentDAO().rechercherParCin(cin);
 		        if (res != null) {
-		            // 1. On transforme le résultat unique en liste
-		            List<Adherent> resultat = Collections.singletonList(res);
-		            
-		            AfficherAdherentsPanel afficherAdherentsPanel = new AfficherAdherentsPanel();
-		            afficherAdherentsPanel.remplirTable(resultat);
+		            panelAfficher.remplirTable(Collections.singletonList(res)); // ← instance originale
 		            cardLayout.show(conteneur, "AFFICHER");
 		        } else {
 		            JOptionPane.showMessageDialog(null, "Aucun adhérent trouvé.");
 		        }
 		    }
 		});
+
 		mntmParEmail.addActionListener(e -> {
 		    String email = JOptionPane.showInputDialog("Entrez l'email :");
-		    try {
-		    	if (email.contains("@")
-	                 && !email.contains(".")
-	                 && !email.trim().isEmpty()) {
-
-	                JOptionPane.showMessageDialog(
-	                        null,
-	                        "Email invalide"
-	                );
-
-	                return;
-		    	}else {
-		    		AdherentDAO dao = new AdherentDAO();
-			        Adherent res = dao.rechercherParEmail(email);
-			        
-			        if (res != null) {
-			        	List<Adherent> resultat = Collections.singletonList(res);
-			            
-			            AfficherAdherentsPanel afficherAdherentsPanel = new AfficherAdherentsPanel();
-			            afficherAdherentsPanel.remplirTable(resultat);
-			            cardLayout.show(conteneur, "AFFICHER");
-		    		
-			        }
-		    	}
-	    	}catch (Exception ex) {
-
-		            JOptionPane.showMessageDialog(
-		                    null,
-		                    "Erreur : " + ex.getMessage()
-		            );
-
-	    	 ex.printStackTrace();
-	    	}
+		    if (email == null || email.trim().isEmpty()) return;
+		    if (!email.contains("@") || !email.contains(".")) {
+		        JOptionPane.showMessageDialog(null, "Email invalide");
+		        return;
+		    }
+		    Adherent res = new AdherentDAO().rechercherParEmail(email);
+		    if (res != null) {
+		        panelAfficher.remplirTable(Collections.singletonList(res)); // ← instance originale
+		        cardLayout.show(conteneur, "AFFICHER");
+		    } else {
+		        JOptionPane.showMessageDialog(null, "Aucun adhérent trouvé.");
+		    }
 		});
+
 		btnRechercher.addActionListener(e -> {
-			String saisie = nomPrenomTf.getText().trim();
-
-	        if (!saisie.isEmpty()) {
-	            AdherentDAO dao = new AdherentDAO();
-	            List<Adherent> resultats = dao.rechercherParNomPrenom(saisie, saisie);
-
-	            if (resultats != null && !resultats.isEmpty()) {
-		            AfficherAdherentsPanel afficherAdherentsPanel = new AfficherAdherentsPanel();
-		            afficherAdherentsPanel.remplirTable(resultats);
-	                cardLayout.show(conteneur, "AFFICHER");
-	                nomPrenomTf.setText("");
-	            } else {
-	                JOptionPane.showMessageDialog(null, 
-	                    "Aucun adhérent trouvé pour : " + saisie, 
-	                    "Résultat vide", 
-	                    JOptionPane.INFORMATION_MESSAGE);
-	            }
-	        } else {
-	            JOptionPane.showMessageDialog(null, "Veuillez saisir le nom et le prénom de l'adhérent !");
-	        }
+		    String saisie = nomPrenomTf.getText().trim();
+		    if (!saisie.isEmpty()) {
+		        List<Adherent> resultats = new AdherentDAO().rechercherParNomPrenom(saisie, saisie);
+		        if (resultats != null && !resultats.isEmpty()) {
+		            panelAfficher.remplirTable(resultats); // ← instance originale
+		            cardLayout.show(conteneur, "AFFICHER");
+		            nomPrenomTf.setText("");
+		        } else {
+		            JOptionPane.showMessageDialog(null, "Aucun adhérent trouvé pour : " + saisie);
+		        }
+		    } else {
+		        JOptionPane.showMessageDialog(null, "Veuillez saisir le nom et le prénom !");
+		    }
 		});
+
 		deconnexion.addActionListener(e->{
 			Authentification access = new Authentification ();
 			access.setVisible(true);

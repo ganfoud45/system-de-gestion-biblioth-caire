@@ -78,10 +78,10 @@ public class AfficherAdherentsPanel extends JPanel {
 		enregistrerBtn.setBounds(499, 484, 144, 43);
 		add(enregistrerBtn);
 		
-		JButton actualiserBtn = new JButton("Actualiser");
-		actualiserBtn.setFont(new Font("Dialog", Font.BOLD, 16));
-		actualiserBtn.setBounds(328, 484, 144, 43);
-		add(actualiserBtn);
+		JButton annulerBtn = new JButton("Actualiser");
+		annulerBtn.setFont(new Font("Dialog", Font.BOLD, 16));
+		annulerBtn.setBounds(328, 484, 144, 43);
+		add(annulerBtn);
 		
 		//------------listeners--------------------------
 		enregistrerBtn.addActionListener(new ActionListener() {
@@ -120,7 +120,7 @@ public class AfficherAdherentsPanel extends JPanel {
 	    });
 		chargerTable() ;
 		
-		actualiserBtn.addActionListener(e -> chargerTable());
+		annulerBtn.addActionListener(e -> chargerTable());
 	
 	
 	}
