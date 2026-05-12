@@ -65,7 +65,7 @@ public class DocumentDAO implements IDAO<Document> {
     public List<Document> rechercherParNom(String nom) {
         try (Session s = HibernateUtil.getSessionFactory().openSession()) {
             return s.createQuery(
-                "FROM Document d WHERE LOWER(d.nomDoc) LIKE LOWER(:nom)",
+                "Select d FROM Document d WHERE LOWER(d.nomDoc) LIKE LOWER(:nom)",
                 Document.class)
                 .setParameter("nom", "%" + nom + "%")
                 .list();
@@ -76,7 +76,7 @@ public class DocumentDAO implements IDAO<Document> {
     public Document rechercherParNum(int numDoc) {
         try (Session s = HibernateUtil.getSessionFactory().openSession()) {
             return s.createQuery(
-                "FROM Document d WHERE d.numDoc =: numDoc",
+                "Select d FROM Document d WHERE d.numDoc =: numDoc",
                 Document.class)
                 .setParameter("numDoc", numDoc)
                 .uniqueResult();
@@ -87,7 +87,7 @@ public class DocumentDAO implements IDAO<Document> {
     public List<Document> rechercherParType(String type) {
         try (Session s = HibernateUtil.getSessionFactory().openSession()) {
             return s.createQuery(
-                "FROM Document d WHERE d.type = :type",
+                "Select d FROM Document d WHERE d.type = :type",
                 Document.class)
                 .setParameter("type", type)
                 .list();
@@ -102,7 +102,7 @@ public class DocumentDAO implements IDAO<Document> {
     public List<Document> rechercherParMotsCle(String motsCles) {
         try (Session s = HibernateUtil.getSessionFactory().openSession()) {
             return s.createQuery(
-                "FROM Livre l WHERE LOWER(l.motsCle) LIKE LOWER(:motsCles)",
+                "Select l FROM Livre l WHERE LOWER(l.motsCle) LIKE LOWER(:motsCles)",
                 Document.class)
                 .setParameter("motsCles", "%" + motsCles + "%")
                 .list();
@@ -114,7 +114,7 @@ public class DocumentDAO implements IDAO<Document> {
     public Document rechercherParISBN(String isbn) {
     	try (Session s=HibernateUtil.getSessionFactory().openSession()) {
     		return s.createQuery(
-    				"FROM Livre l WHERE LOWER(l.isbn) LIKE LOWER(:isbn)",Document.class)
+    				"Select l FROM Livre l WHERE LOWER(l.isbn) LIKE LOWER(:isbn)",Document.class)
     				.setParameter("isbn", "%" + isbn + "%")
     				.uniqueResult();
     		
@@ -125,7 +125,7 @@ public class DocumentDAO implements IDAO<Document> {
     public List<Document> rechercherParAuteur(String auteur) {
     	try(Session s=HibernateUtil.getSessionFactory().openSession()) {
     		return s.createQuery(
-    				"FROM Livre l WHERE LOWER(l.auteur) LIKE LOWER(:auteur)",Document.class)
+    				"Select l FROM Livre l WHERE LOWER(l.auteur) LIKE LOWER(:auteur)",Document.class)
     				.setParameter("auteur", "%" + auteur + "%")
     				.list();
     	}
@@ -136,7 +136,7 @@ public class DocumentDAO implements IDAO<Document> {
     public List<Document> rechercherParLangue(String lgSource,String lgCible){
     	try(Session s=HibernateUtil.getSessionFactory().openSession()) {
     		return s.createQuery(
-    				"FROM Dictionnaire d WHERE LOWER(d.lgSource) LIKE LOWER(:lgSource)"
+    				"SElect d FROM Dictionnaire d WHERE LOWER(d.lgSource) LIKE LOWER(:lgSource)"
     				+"AND LOWER(d.lgCible) LIKE LOWER(:lgCible)",Document.class
     				).setParameter("lgSource", "%" + lgSource + "%")
     				.setParameter("lgCible", "%" + lgCible + "%")
@@ -148,7 +148,7 @@ public class DocumentDAO implements IDAO<Document> {
     public Document rechercherParISSN(String issn) {
     	try (Session s=HibernateUtil.getSessionFactory().openSession()) {
     		return s.createQuery(
-    				"FROM Revue r WHERE LOWER(r.issn) LIKE LOWER(:issn)",Document.class)
+    				"Select r FROM Revue r WHERE LOWER(r.issn) LIKE LOWER(:issn)",Document.class)
     				.setParameter("issn", "%" + issn + "%")
     				.uniqueResult();
     		
@@ -159,7 +159,7 @@ public class DocumentDAO implements IDAO<Document> {
     public List<Document> rechercherParDomaineSoutenance(String domaineSoutenance) {
     	try (Session s=HibernateUtil.getSessionFactory().openSession()) {
     		return s.createQuery(
-    				"FROM These t WHERE LOWER(t.domaineSoutenance) LIKE LOWER(:domaineSoutenance)",Document.class)
+    				"Select t FROM These t WHERE LOWER(t.domaineSoutenance) LIKE LOWER(:domaineSoutenance)",Document.class)
     				.setParameter("domaineSoutenance", "%" + domaineSoutenance + "%")
     				.list();
     		

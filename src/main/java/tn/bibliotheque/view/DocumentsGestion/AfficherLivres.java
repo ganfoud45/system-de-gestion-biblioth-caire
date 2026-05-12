@@ -28,7 +28,7 @@ public class AfficherLivres extends JPanel {
 	 * Create the panel.
 	 */
 	public AfficherLivres() {
-		setBackground(new Color(245, 255, 250));
+		setBackground(new Color(255, 255, 255));
 		setLayout(null);
 		
 		JLabel title = new JLabel("Liste des Livres ");
@@ -60,7 +60,7 @@ public class AfficherLivres extends JPanel {
 		chargerTable();
 		
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 77, 666, 365);
+		scrollPane.setBounds(26, 87, 697, 365);
 		add(scrollPane);
 		
 		JButton enregistrerBtn = new JButton("Enregistrer");

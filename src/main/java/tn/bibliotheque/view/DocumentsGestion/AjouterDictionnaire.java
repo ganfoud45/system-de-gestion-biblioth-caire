@@ -31,7 +31,7 @@ public class AjouterDictionnaire extends JPanel {
 	 * Create the panel.
 	 */
 	public AjouterDictionnaire() {
-		setBackground(new Color(245, 255, 250));
+		setBackground(new Color(255, 255, 255));
 		setLayout(null);
 		
 		JLabel nbreExemplbl=new JLabel("Nombre exemplaire :");

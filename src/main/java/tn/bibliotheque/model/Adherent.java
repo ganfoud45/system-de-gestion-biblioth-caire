@@ -17,9 +17,9 @@ public class Adherent extends Utilisateur {
     }
 
     public Adherent(int id, String cin, String nom, String prenom,
-                    String dateNaissance, String email, Integer numTel,
-                    String motDePasse, Integer numAbonnement) {
-        super(id, cin, nom, prenom, dateNaissance, email, numTel, motDePasse);
+                    String dateNaissance, String email, int numTel,
+                    String motDePasse,String type, Integer numAbonnement) {
+        super(id, cin, nom, prenom, dateNaissance, email, numTel, motDePasse,type);
         this.numAbonnement = numAbonnement;
     }
 

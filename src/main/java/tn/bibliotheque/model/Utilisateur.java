@@ -26,7 +26,7 @@ public abstract class Utilisateur {
 	@Column(name="email")
     private String email;
 	@Column(name="numTel")
-    private Integer numTel;
+    private int numTel;
 	@Column(name="motDePasse")
     private String motDePasse;
 	@Column(name="type")
@@ -36,8 +36,8 @@ public abstract class Utilisateur {
     public Utilisateur() {}
 
     public Utilisateur(int id, String cin, String nom, String prenom,
-                       String dateNaissance, String email, Integer numTel,
-                       String motDePasse) {
+                       String dateNaissance, String email, int numTel,
+                       String motDePasse,String type) {
         this.id = id;
         this.cin = cin;
         this.nom = nom;
@@ -46,6 +46,7 @@ public abstract class Utilisateur {
         this.email = email;
         this.numTel = numTel;
         this.motDePasse = motDePasse;
+        this.type=type;
     }
 
     // Getters
@@ -55,8 +56,10 @@ public abstract class Utilisateur {
     public String getPrenom() { return prenom; }
     public String getDateNaissance() { return dateNaissance; }
     public String getEmail() { return email; }
-    public Integer getNumTel() { return numTel; }
+    public int getNumTel() { return numTel; }
     public String getMotDePasse() { return motDePasse; }
+    public String getType() { return type; }
+
 
     // Setters
     public void setId(int id) { this.id = id; }
@@ -65,8 +68,10 @@ public abstract class Utilisateur {
     public void setPrenom(String prenom) { this.prenom = prenom; }
     public void setDateNaissance(String dateNaissance) { this.dateNaissance = dateNaissance; }
     public void setEmail(String email) { this.email = email; }
-    public void setNumTel(Integer numTel) { this.numTel = numTel; }
+    public void setNumTel(int numTel) { this.numTel = numTel; }
     public void setMotDePasse(String motDePasse) { this.motDePasse = motDePasse; }
+    public void setType(String type) { this.type = type; }
+
 
     @Override
     public String toString() {

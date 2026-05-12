@@ -39,7 +39,7 @@ public class AfficherAdherentsPanel extends JPanel {
 		
 		this.parent = parent;
 
-		setBackground(new Color(245, 255, 250));
+		setBackground(new Color(255, 255, 255));
 		setLayout(null);
 		
 		JLabel lblAjouterUnAdhrent = new JLabel("Liste des Adhérents ");
@@ -70,7 +70,7 @@ public class AfficherAdherentsPanel extends JPanel {
 		chargerTable();
 		
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 77, 666, 365);
+		scrollPane.setBounds(26, 87, 697, 365);
 		add(scrollPane);
 		
 		JButton enregistrerBtn = new JButton("Enregistrer");
@@ -101,8 +101,14 @@ public class AfficherAdherentsPanel extends JPanel {
 	                        a.setDateNaissance(model.getValueAt(i, 3).toString());
 	                        a.setEmail(model.getValueAt(i, 4).toString());
 	                        
-	                        a.setNumTel(Integer.parseInt(model.getValueAt(i, 5).toString()));
-	                        a.setNumAbonnement(Integer.parseInt(model.getValueAt(i, 6).toString()));
+	                        String telStr = model.getValueAt(i, 5).toString().trim();
+	                        if (!telStr.isEmpty()) {
+	                        	String abnStr = model.getValueAt(i, 6).toString().trim();
+	                        }
+	                        String abnStr = model.getValueAt(i, 6).toString().trim();
+	                        if (!abnStr.isEmpty()) {
+	                            a.setNumAbonnement(Integer.parseInt(abnStr));
+	                        }
 	                        a.setMotDePasse(model.getValueAt(i, 7).toString());
 
 	                        dao.update(a);
@@ -110,13 +116,16 @@ public class AfficherAdherentsPanel extends JPanel {
 	                }
 
 	                JOptionPane.showMessageDialog(null, "Toutes les modifications ont été enregistrées avec succès !");
-	                
-	            } catch (Exception ex) {
-	                JOptionPane.showMessageDialog(null, "Erreur lors de l'enregistrement : " + ex.getMessage(), 
-	                                              "Erreur", JOptionPane.ERROR_MESSAGE);
-	                ex.printStackTrace();
-	            }
-	        }
+	                chargerTable();
+				  } catch (NumberFormatException nfe) {
+				                JOptionPane.showMessageDialog(null, "Erreur : 	le numéro d'abonnement doit être un nombre valide.", 
+			                            "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
+				  	} catch (Exception ex) {
+				  		JOptionPane.showMessageDialog(null, "Erreur lors de l'enregistrement : " + ex.getMessage(), 
+			                            "Erreur", JOptionPane.ERROR_MESSAGE);
+				  		ex.printStackTrace();
+				  	}
+			}
 	    });
 		chargerTable() ;
 		
@@ -131,8 +140,7 @@ public class AfficherAdherentsPanel extends JPanel {
 
 		    AdherentDAO dao = new AdherentDAO();
 
-		    DefaultTableModel model =
-		            (DefaultTableModel) table.getModel();
+		    DefaultTableModel model = (DefaultTableModel) table.getModel();
 
 		    model.setRowCount(0);
 

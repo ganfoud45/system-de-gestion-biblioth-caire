@@ -29,7 +29,7 @@ public class AfficherTheses extends JPanel {
 	 * Create the panel.
 	 */
 	public AfficherTheses() {
-		setBackground(new Color(245, 255, 250));
+		setBackground(new Color(255, 255, 255));
 		setLayout(null);
 		
 		JLabel title = new JLabel("Liste des Theses ");
@@ -54,7 +54,7 @@ public class AfficherTheses extends JPanel {
 		table.getColumnModel().getColumn(0).setPreferredWidth(20);
 		
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 77, 712, 365);
+		scrollPane.setBounds(26, 87, 697, 365);
 		add(scrollPane);
 		
 		JButton enregistrerBtn = new JButton("Enregistrer");

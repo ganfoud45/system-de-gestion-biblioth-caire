@@ -20,8 +20,8 @@ public class Bibliothecaire extends Utilisateur {
 
     public Bibliothecaire(int id, String cin, String nom, String prenom,
                           String dateNaissance, String email, int numTel,
-                          String motDePasse, String matricule, String grade) {
-        super(id, cin, nom, prenom, dateNaissance, email, numTel, motDePasse);
+                          String motDePasse, String matricule, String grade, String type) {
+        super(id, cin, nom, prenom, dateNaissance, email, numTel, motDePasse,type);
         this.matricule = matricule;
         this.grade = grade;
     }

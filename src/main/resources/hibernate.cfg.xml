@@ -7,12 +7,10 @@
 
 
     <!-- MySQL dialect -->
-    <property name="hibernate.dialect">
-      org.hibernate.dialect.MySQLDialect
-    </property>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
 
     <!-- AUTO-CREATE tables on startup -->
-    <property name="hibernate.hbm2ddl.auto">update</property>
+    <property name="hibernate.hbm2ddl.auto">validate</property>
 
     <!-- Show generated SQL in console -->
     <property name="hibernate.show_sql">true</property>

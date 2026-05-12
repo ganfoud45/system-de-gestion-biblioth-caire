@@ -31,7 +31,7 @@ public class AjouterAdherent extends JPanel {
 	public AjouterAdherent() {
 		this.parent = parent;
 		
-		setBackground(new Color(245, 255, 250));
+		setBackground(new Color(255, 255, 255));
 		setLayout(null);
 		
 		JLabel title = new JLabel("Ajouter Un Adhérent ");
@@ -165,21 +165,15 @@ public class AjouterAdherent extends JPanel {
 		            String cin=cinTf.getText().trim();
 		            String motDePasse =new String(mdpTf.getPassword());
 		            // Vérification champs vides
-		            if (nom.isEmpty()
-		                    || prenom.isEmpty()
-		                    || dateNaissance.isEmpty()
-		                    || email.isEmpty()
-		                    || motDePasse.isEmpty()
-		                    || cin.isEmpty()) {
-
-		                JOptionPane.showMessageDialog(
-		                        null,
-		                        "Veuillez remplir tous les champs"
-		                );
-
-		                return;
-		            }
-
+		            if (nom.isEmpty() || prenom.isEmpty() || dateNaissance.isEmpty() 
+		                    || email.isEmpty() || motDePasse.isEmpty() || cin.isEmpty() 
+		                    || abonnementTf.getText().trim().isEmpty()) {
+		                    
+		                    JOptionPane.showMessageDialog(null, "Veuillez remplir tous les champs");
+		                    return;
+		                }
+		            int telephone=Integer.parseInt(numTf.getText().trim());
+            		int abonnement = Integer.parseInt(abonnementTf.getText().trim());
 		            // Vérification email simple
 		            if (!email.contains("@")
 		                    || !email.contains(".")) {
@@ -192,20 +186,11 @@ public class AjouterAdherent extends JPanel {
 		                return;
 		            }
 
-		            // Conversion téléphone
-		            int telephone =
-		                    Integer.parseInt(
-		                            numTf.getText().trim()
-		                    );
-
-		            // Conversion abonnement
-		            int abonnement =
-		                    Integer.parseInt(
-		                            abonnementTf.getText().trim()
-		                    );
-
+		            
 		            // Création objet
 		            Adherent a = new Adherent();
+		            
+		            a.setType("Adherent");
 
 		            a.setNom(nom);
 
@@ -214,6 +199,8 @@ public class AjouterAdherent extends JPanel {
 		            a.setDateNaissance(dateNaissance);
 
 		            a.setEmail(email);
+		            
+		            a.setCin(cin);
 
 		            a.setNumTel(telephone);
 
@@ -241,6 +228,8 @@ public class AjouterAdherent extends JPanel {
 		            emailTf.setText("");
 
 		            numTf.setText("");
+		            
+		            cinTf.setText("");
 
 		            abonnementTf.setText("");
 
@@ -252,7 +241,7 @@ public class AjouterAdherent extends JPanel {
 
 		            JOptionPane.showMessageDialog(
 		                    annulerBtn,
-		                    "Téléphone et abonnement doivent être numériques"
+		                    "abonnement doivent être numériques"
 		            );
 		        }
 

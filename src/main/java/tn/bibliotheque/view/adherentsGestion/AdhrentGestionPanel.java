@@ -20,9 +20,10 @@ import java.util.List;
 public class AdhrentGestionPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JTextField nomPrenomTf;
+	private JTextField prenomTf;
     protected CardLayout cardLayout ;
     protected JPanel conteneur;
+    private JTextField nomTf;
 
 	/**
 	 * Create the panel.
@@ -31,41 +32,43 @@ public class AdhrentGestionPanel extends JPanel {
 		setBackground(new Color(245, 255, 250));
 		setLayout(new BorderLayout());            
 		JSplitPane splitPane = new JSplitPane();
-		splitPane.setDividerLocation(150);        
+		splitPane.setDividerLocation(250);        
 
 		add(splitPane, BorderLayout.CENTER);
 		
 		//-------------------------------création de panel acceuil------------------------------------------------
 		JPanel Acceuil = new JPanel();
+		Acceuil.setBackground(new Color(255, 255, 255));
 		Acceuil.setLayout(null);
 		
-		nomPrenomTf = new JTextField();
-		nomPrenomTf.setText("Nom prenom");
-		nomPrenomTf.setBounds(86, 366, 311, 38);
-		Acceuil.add(nomPrenomTf);
-		nomPrenomTf.setColumns(10);
+		prenomTf = new JTextField();
+		prenomTf.setText(" Prenom");
+		prenomTf.setBounds(86, 349, 311, 38);
+		Acceuil.add(prenomTf);
+		prenomTf.setColumns(10);
 		
 		JLabel lblRechercherUnAdhrent = new JLabel("Rechercher un adhérent");
 		lblRechercherUnAdhrent.setFont(new Font("Bitstream Charter", Font.BOLD, 15));
-		lblRechercherUnAdhrent.setBounds(133, 316, 201, 38);
+		lblRechercherUnAdhrent.setBounds(86, 244, 201, 38);
 		Acceuil.add(lblRechercherUnAdhrent);
 		
 		JLabel lblVeuillezEntrerLe = new JLabel("Veuillez entrer le nom et le prénom de l'adhérent");
 		lblVeuillezEntrerLe.setVerticalAlignment(SwingConstants.TOP);
 		lblVeuillezEntrerLe.setFont(new Font("DejaVu Sans Light", Font.BOLD, 12));
-		lblVeuillezEntrerLe.setBounds(85, 416, 312, 38);
+		lblVeuillezEntrerLe.setBounds(86, 399, 312, 38);
 		Acceuil.add(lblVeuillezEntrerLe);
 		
 		JLabel lblBienvenueDansVotre = new JLabel("Bienvenue dans votre bibliothéque !");
 		lblBienvenueDansVotre.setFont(new Font("Lato Hairline", Font.BOLD, 20));
-		lblBienvenueDansVotre.setBounds(60, 204, 360, 71);
+		lblBienvenueDansVotre.setBounds(58, 174, 360, 71);
 		Acceuil.add(lblBienvenueDansVotre);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
 		JLabel lblDateTime = new JLabel(LocalDateTime.now().format(formatter));
+		lblDateTime.setHorizontalAlignment(SwingConstants.LEFT);
 		lblDateTime.setFont(new Font("DejaVu Serif Condensed", Font.BOLD, 15));
 		lblDateTime.setSize(161, 38);
-		lblDateTime.setLocation(295, 12);
+		lblDateTime.setLocation(12, 12);
 		Acceuil.add(lblDateTime);
 
 		// Timer Swing qui met à jour le label chaque seconde
@@ -84,18 +87,22 @@ public class AdhrentGestionPanel extends JPanel {
 		JPopupMenu popupRecherche = new JPopupMenu();
 		JMenuItem mntmParCin = new JMenuItem("Par cin");
 		JMenuItem mntmParEmail = new JMenuItem("Par email");
+		JMenuItem mntmParNom = new JMenuItem("Par nom et prénom");
+
 		popupRecherche.add(mntmParCin);
 		popupRecherche.add(mntmParEmail);
+		popupRecherche.add(mntmParNom);
+
 
 		JButton btnRechercherAdh = new JButton("Rechercher adhérent");
-		btnRechercherAdh.setBounds(0, 28, 175, 35);
+		btnRechercherAdh.setBounds(12, 156, 225, 44);
 		btnRechercherAdh.addActionListener(e -> 
 		    popupRecherche.show(btnRechercherAdh, 0, btnRechercherAdh.getHeight())
 		);
 		panel.add(btnRechercherAdh);
 		
 		JButton btnRechercher = new JButton("Rechercher");
-		btnRechercher.setBounds(185, 447, 117, 25);
+		btnRechercher.setBounds(164, 447, 138, 40);
 		Acceuil.add(btnRechercher);
 		
 		//---------------------------------afficher adh------------------------------------------------------
@@ -104,25 +111,24 @@ public class AdhrentGestionPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		afficherAdhBttn.setBounds(12, 186, 175, 35);
+		afficherAdhBttn.setBounds(12, 212, 225, 44);
 		panel.add(afficherAdhBttn);
 		
 		//---------------------------------ajouter adh-------------------------------------------------------
 		JButton AjouterAdhBttn = new JButton("Ajouter adhérent");
-		AjouterAdhBttn.setBounds(12, 233, 175, 35);
+		AjouterAdhBttn.setBounds(12, 266, 225, 44);
 		panel.add(AjouterAdhBttn);
 		
 		//---------------------------------supprimer adh------------------------------------------------------
 		JButton SupprimerAdhBttn = new JButton("Supprimer adhérent");
-		SupprimerAdhBttn.setFont(new Font("Dialog", Font.BOLD, 11));
-		SupprimerAdhBttn.setHorizontalAlignment(SwingConstants.LEFT);
-		SupprimerAdhBttn.setBounds(12, 281, 175, 35);
+		SupprimerAdhBttn.setFont(new Font("Dialog", Font.BOLD, 12));
+		SupprimerAdhBttn.setBounds(12, 320, 225, 44);
 		panel.add(SupprimerAdhBttn);
 		
 		
 		//---------------------------------déconnexion--------------------------------------------------------- 
 		JButton deconnexion = new JButton("Déconnexion");
-		deconnexion.setBounds(12, 493, 175, 35);
+		deconnexion.setBounds(12, 493, 225, 44);
 		panel.add(deconnexion);
 		
 		//--------------------------------création de cardLayout-----------------------------------------------
@@ -137,6 +143,12 @@ public class AdhrentGestionPanel extends JPanel {
 		JPanel AjouterAdherent    = new AjouterAdherent();
 
 		conteneur.add(Acceuil,          "ACCEUIL");
+		
+		nomTf = new JTextField();
+		nomTf.setText("Nom ");
+		nomTf.setColumns(10);
+		nomTf.setBounds(86, 294, 311, 38);
+		Acceuil.add(nomTf);
 		conteneur.add(panelAfficher,    "AFFICHER");
 		conteneur.add(AjouterAdherent,  "AJOUTER");
 		conteneur.add(SupprimerAdherents,"SUPPRIMER");
@@ -188,23 +200,34 @@ public class AdhrentGestionPanel extends JPanel {
 		        JOptionPane.showMessageDialog(null, "Aucun adhérent trouvé.");
 		    }
 		});
-
-		btnRechercher.addActionListener(e -> {
-		    String saisie = nomPrenomTf.getText().trim();
-		    if (!saisie.isEmpty()) {
-		        List<Adherent> resultats = new AdherentDAO().rechercherParNomPrenom(saisie, saisie);
-		        if (resultats != null && !resultats.isEmpty()) {
-		            panelAfficher.remplirTable(resultats); // ← instance originale
-		            cardLayout.show(conteneur, "AFFICHER");
-		            nomPrenomTf.setText("");
-		        } else {
-		            JOptionPane.showMessageDialog(null, "Aucun adhérent trouvé pour : " + saisie);
-		        }
-		    } else {
-		        JOptionPane.showMessageDialog(null, "Veuillez saisir le nom et le prénom !");
-		    }
+		
+		mntmParNom.addActionListener(e -> {
+            cardLayout.show(conteneur, "ACCEUIL");
 		});
 
+		btnRechercher.addActionListener(e -> {
+			String nomSaisi = nomTf.getText().trim();
+		    String prenomSaisi = prenomTf.getText().trim();
+
+		    // On vérifie qu'au moins l'un des deux n'est pas vide
+		    if (!nomSaisi.isEmpty() || !prenomSaisi.isEmpty()) {
+		        
+		        List<Adherent> resultats = new AdherentDAO().rechercherParNomPrenom(nomSaisi, prenomSaisi);
+		        
+		        if (resultats != null && !resultats.isEmpty()) {
+		            panelAfficher.remplirTable(resultats);
+		            cardLayout.show(conteneur, "AFFICHER");
+		            
+		            // On vide les champs après la réussite
+		            nomTf.setText("");
+		            prenomTf.setText("");
+		        } else {
+		            JOptionPane.showMessageDialog(null, "Aucun adhérent trouvé pour ce nom et prénom.");
+		        }
+		    } else {
+		        JOptionPane.showMessageDialog(null, "Veuillez remplir au moins un champ (Nom ou Prénom) !");
+		    }
+		});	
 		deconnexion.addActionListener(e->{
 			Authentification access = new Authentification ();
 			access.setVisible(true);
@@ -219,6 +242,6 @@ public class AdhrentGestionPanel extends JPanel {
 			
 		
 	}
-}
+	}
 		    	
 

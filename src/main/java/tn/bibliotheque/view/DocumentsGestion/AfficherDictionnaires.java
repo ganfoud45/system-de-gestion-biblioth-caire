@@ -64,7 +64,7 @@ public class AfficherDictionnaires extends JPanel {
 		table.getColumnModel().getColumn(0).setPreferredWidth(20);
 		
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(0, 77, 666, 365);
+		scrollPane.setBounds(22, 89, 687, 365);
 		add(scrollPane);
 		
 		JButton enregistrerBtn = new JButton("Enregistrer");

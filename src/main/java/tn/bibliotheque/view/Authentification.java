@@ -43,38 +43,39 @@ public class Authentification extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("🎉WELCOME TO OUR LIBRARY🎉 ");
+		JLabel lblNewLabel = new JLabel("🎉 Bienvenue dans votre Bibliothéque 🎉 ");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setForeground(new Color(102, 51, 204));
 		lblNewLabel.setFont(new Font("Serif", Font.BOLD, 30));
-		lblNewLabel.setBounds(207, 10, 511, 74);
+		lblNewLabel.setBounds(140, 12, 696, 74);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("USERNAME");
-		lblNewLabel_1.setFont(new Font("Serif", Font.PLAIN, 15));
-		lblNewLabel_1.setBounds(172, 114, 116, 28);
+		JLabel lblNewLabel_1 = new JLabel("CIN ");
+		lblNewLabel_1.setFont(new Font("Dialog", Font.PLAIN, 20));
+		lblNewLabel_1.setBounds(175, 123, 116, 28);
 		contentPane.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("PASSWORD");
-		lblNewLabel_1_1.setFont(new Font("Serif", Font.PLAIN, 15));
-		lblNewLabel_1_1.setBounds(176, 181, 93, 28);
+		JLabel lblNewLabel_1_1 = new JLabel("Mot De Passe ");
+		lblNewLabel_1_1.setFont(new Font("Dialog", Font.PLAIN, 20));
+		lblNewLabel_1_1.setBounds(175, 188, 145, 28);
 		contentPane.add(lblNewLabel_1_1);
 		
 		JTextArea username = new JTextArea();
-		username.setBounds(338, 118, 242, 28);
+		username.setBounds(338, 118, 242, 38);
 		contentPane.add(username);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(338, 184, 242, 28);
+		passwordField.setBounds(338, 184, 242, 38);
 		contentPane.add(passwordField);
 		
 		
-		JButton btnLogin = new JButton("LOG IN");
+		JButton btnLogin = new JButton("se connecter ");
 		btnLogin.setFont(new Font("Serif", Font.BOLD, 15));
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnLogin.setBounds(403, 250, 121, 46);
+		btnLogin.setBounds(377, 249, 165, 46);
 		contentPane.add(btnLogin);
 		
 
@@ -112,6 +113,14 @@ public class Authentification extends JFrame {
 	public Utilisateur login(String cin, String mdp) {
 	    UtilisateurDAO u = new UtilisateurDAO();
 	    Utilisateur user = u.rechercherParCin(cin);
+	    
+	    if (user == null) {
+	        System.out.println("DEBUG: CIN non trouvé dans la base : " + cin);
+	    } else {
+	        System.out.println("DEBUG: Utilisateur trouvé : " + user.getNom());
+	        System.out.println("DEBUG: Comparaison : Base[" + user.getMotDePasse() + "] vs Saisi[" + mdp + "]");
+	    }
+	    
 	    if (user != null && user.getMotDePasse().equals(mdp)) {
 	        return user;
 	    }

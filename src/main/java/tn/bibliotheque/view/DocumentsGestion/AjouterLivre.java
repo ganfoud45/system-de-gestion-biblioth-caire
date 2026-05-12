@@ -33,7 +33,7 @@ public class AjouterLivre extends JPanel {
 	 * Create the panel.
 	 */
 	public AjouterLivre() {
-		setBackground(new Color(245, 255, 250));
+		setBackground(new Color(255, 255, 255));
 		setLayout(null);
 		
 		

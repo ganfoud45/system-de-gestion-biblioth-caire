@@ -33,22 +33,24 @@ public class DocumentGestionPanel extends JPanel {
 		setLayout(new BorderLayout());
 
 		JSplitPane splitPane = new JSplitPane();
-		splitPane.setDividerLocation(150);
+		splitPane.setDividerLocation(250);
 		add(splitPane, BorderLayout.CENTER);		
 		//-------------------------------création de panel acceuil------------------------------------------------
 		JPanel Acceuil = new JPanel();
+		Acceuil.setBackground(new Color(255, 255, 255));
 		Acceuil.setLayout(null);
 		
 		JLabel lblBienvenueDansVotre = new JLabel("Bienvenue dans votre bibliothéque !");
 		lblBienvenueDansVotre.setFont(new Font("Lato Hairline", Font.BOLD, 20));
-		lblBienvenueDansVotre.setBounds(57, 248, 360, 71);
+		lblBienvenueDansVotre.setBounds(89, 218, 360, 71);
 		Acceuil.add(lblBienvenueDansVotre);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
 		JLabel lblDateTime = new JLabel(LocalDateTime.now().format(formatter));
+		lblDateTime.setHorizontalAlignment(SwingConstants.LEFT);
 		lblDateTime.setFont(new Font("DejaVu Serif Condensed", Font.BOLD, 15));
 		lblDateTime.setSize(161, 38);
-		lblDateTime.setLocation(295, 12);
+		lblDateTime.setLocation(12, 12);
 		Acceuil.add(lblDateTime);
 
 		// Timer Swing qui met à jour le label chaque seconde
@@ -66,7 +68,7 @@ public class DocumentGestionPanel extends JPanel {
 
 		// ========== RECHERCHER ==========
 		JButton btnRechercher = new JButton("Rechercher document");
-		btnRechercher.setBounds(0, 28, 187, 35);
+		btnRechercher.setBounds(12, 156, 225, 44);
 		panel.add(btnRechercher);
 
 		JPopupMenu popupRechercher = new JPopupMenu();
@@ -96,7 +98,7 @@ public class DocumentGestionPanel extends JPanel {
 
 		// ========== AFFICHER ==========
 		JButton btnAfficher = new JButton("Afficher documents");
-		btnAfficher.setBounds(0, 75, 187, 35);
+		btnAfficher.setBounds(12, 212, 225, 44);
 		panel.add(btnAfficher);
 
 		JPopupMenu popupAfficher = new JPopupMenu();
@@ -115,7 +117,7 @@ public class DocumentGestionPanel extends JPanel {
 
 		// ========== AJOUTER ==========
 		JButton btnAjouter = new JButton("Ajouter documents");
-		btnAjouter.setBounds(0, 122, 187, 35);
+		btnAjouter.setBounds(12, 266, 225, 44);
 		panel.add(btnAjouter);
 
 		JPopupMenu popupAjouter = new JPopupMenu();
@@ -134,13 +136,13 @@ public class DocumentGestionPanel extends JPanel {
 
 		// ========== SUPPRIMER ==========
 		JButton SupprimerDocBttn = new JButton("Supprimer document");
-		SupprimerDocBttn.setFont(new Font("Dialog", Font.BOLD, 11));
-		SupprimerDocBttn.setBounds(0, 169, 187, 35);
+		SupprimerDocBttn.setFont(new Font("Dialog", Font.BOLD, 12));
+		SupprimerDocBttn.setBounds(12, 320, 225, 44);
 		panel.add(SupprimerDocBttn);
 
 		// ========== DECONNEXION ==========
 		JButton deconnexion = new JButton("Déconnexion");
-		deconnexion.setBounds(0, 493, 175, 35);
+		deconnexion.setBounds(12, 493, 225, 44);
 		panel.add(deconnexion);
 		
 		//--------------------------------création de cardLayout-----------------------------------------------
