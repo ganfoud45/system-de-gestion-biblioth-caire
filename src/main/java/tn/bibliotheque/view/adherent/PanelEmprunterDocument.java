@@ -20,7 +20,7 @@ public class PanelEmprunterDocument extends JPanel {
     private AdherentDAO adhDAO = new AdherentDAO();
     private PretDAO pretDAO = new PretDAO();
 
-    public PanelEmprunterDocument() {
+    public PanelEmprunterDocument(Adherent adherent) {
         setLayout(null);
         setBackground(Color.WHITE);
 
@@ -77,18 +77,29 @@ public class PanelEmprunterDocument extends JPanel {
         btnVerifier.addActionListener(e -> {
             String cin = txtCinAdherent.getText().trim();
             if (cin.isEmpty()) {
-                
                 lblInfoAdherent.setText("Veuillez saisir votre CIN.");
-                return;
+                return; // On arrête l'exécution ici
+            }
+
+            if (!cin.equals(adherent.getCin())) {
+                lblInfoAdherent.setForeground(Color.RED);
+                lblInfoAdherent.setText("🚫 Ce n'est pas votre CIN.");
+                adherentTrouve = null;
+                return; // Sécurité : impossible d'aller plus loin
             }
             adherentTrouve = adhDAO.rechercherParCin(cin);
-            if (adherentTrouve != null) {
-                lblInfoAdherent.setText("✔ " + adherentTrouve.getNom() + " " + adherentTrouve.getPrenom() + " identifié(e).");
-            } else {
-   
-                lblInfoAdherent.setText("✘ Aucun adhérent trouvé avec ce CIN.");
-                adherentTrouve = null;
-            }
+
+            if (adherentTrouve != null  ) {
+                    lblInfoAdherent.setText("✔ " + adherentTrouve.getNom() + " " + adherentTrouve.getPrenom() + " identifié(e).");
+                } 
+            else {
+       
+                    lblInfoAdherent.setText("✘ Aucun adhérent trouvé avec ce CIN.");
+                    adherentTrouve = null;
+                }
+            
+            
+
         });
 
         btnChoisirDoc.addActionListener(e -> {
@@ -101,10 +112,10 @@ public class PanelEmprunterDocument extends JPanel {
             }
         });
 
-        btnEmprunter.addActionListener(e -> confirmerEmprunt());
+        btnEmprunter.addActionListener(e -> confirmerEmprunt(adherent));
     }
 
-    private void confirmerEmprunt() {
+    private void confirmerEmprunt(Adherent adherent) {
         if (adherentTrouve == null) {
             JOptionPane.showMessageDialog(this, "Veuillez d'abord vérifier votre CIN.", "Erreur", JOptionPane.ERROR_MESSAGE);
             return;
@@ -117,7 +128,7 @@ public class PanelEmprunterDocument extends JPanel {
             JOptionPane.showMessageDialog(this, "Ce document n'est plus disponible.", "Stock épuisé", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
+        
         int confirm = JOptionPane.showConfirmDialog(this,
             "Confirmer l'emprunt de \"" + documentSelectionne.getNomDoc() + "\" ?",
             "Confirmation", JOptionPane.YES_NO_OPTION);
@@ -138,11 +149,13 @@ public class PanelEmprunterDocument extends JPanel {
                 txtCinAdherent.setText("");
                 txtDocument.setText("");
                 adherentTrouve = null;
-                documentSelectionne = null;
+                documentSelectionne = null;}
 
-            } catch (Exception ex) {
+             catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Erreur : " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
             }
+        }else {
+        	JOptionPane.showMessageDialog(this, "Erreur : Vous n'êtes pas autorisés a ajouter un emprunt \n Veuillez  saisir votre cin ", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
     }
 }

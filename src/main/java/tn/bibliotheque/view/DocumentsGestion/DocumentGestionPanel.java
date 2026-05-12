@@ -1,8 +1,10 @@
 package tn.bibliotheque.view.DocumentsGestion;
+import tn.bibliotheque.view.adherent.*;
 
 import tn.bibliotheque.dao.DocumentDAO;
 import tn.bibliotheque.model.*;
 import tn.bibliotheque.view.Authentification;
+import tn.bibliotheque.view.adherent.PanelListeDocuments;
 import tn.bibliotheque.view.adherentsGestion.AfficherAdherentsPanel;
 import tn.bibliotheque.view.adherentsGestion.SupprimerAdherentPanel;
 
@@ -162,7 +164,8 @@ public class DocumentGestionPanel extends JPanel {
 		AjouterRevue          AjouterRevue        = new AjouterRevue();
 		AjouterThese          AjouterThese        = new AjouterThese();
 		SupprimerDocument     SupprimerDocument   = new SupprimerDocument();
-
+		PanelListeDocuments pnlListe = new PanelListeDocuments();
+        panel.add(pnlListe, "pageListe");
 		conteneur.add(Acceuil,            "ACCEUIL");
 		conteneur.add(panelAfficherDict,  "AFFICHERDICT");
 		conteneur.add(panelAfficherLiv,   "AFFICHERLIV");
@@ -235,7 +238,12 @@ public class DocumentGestionPanel extends JPanel {
 		            JOptionPane.showMessageDialog(null, "Id invalide");
 		        }
 		    }
-		});
+		    else {
+		    	if(idText.isEmpty()) {
+		    		
+		    		cardLayout.show(panel, "pageListe");
+		    	}}}
+		);
 
 		mntmParMotsClé.addActionListener(e -> {
 		    String mots = JOptionPane.showInputDialog("Entrer les mots clés :");

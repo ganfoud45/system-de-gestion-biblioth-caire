@@ -148,8 +148,8 @@ public class AfficherTheses extends JPanel {
 	                        b.getUniversite(),
 	                        b.getAnneeSoutenance(),
 	                        b.getDatePub(),
-	                        b.getNumDoc(),
 	                        b.getNbExemplaire(),
+	                        b.getNumDoc(),
 		                    b.isDisponible() ? "Oui" : "Non" // Plus lisible qu'un boolean
 		                });
 		            }

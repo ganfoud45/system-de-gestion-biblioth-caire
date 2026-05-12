@@ -67,7 +67,7 @@ public class AdherentAcces extends JFrame {
 		panelAction.add(panelAfficherThes,  "AFFICHERTHES");
         panelAction.add(pnlRecherche, "pageRecherche");
 
-        PanelEmprunterDocument pnlEmprunter = new PanelEmprunterDocument();
+        PanelEmprunterDocument pnlEmprunter = new PanelEmprunterDocument( adherent);
         panelAction.add(pnlEmprunter, "pageEmprunter");
 
         // --- MENU GAUCHE ---
