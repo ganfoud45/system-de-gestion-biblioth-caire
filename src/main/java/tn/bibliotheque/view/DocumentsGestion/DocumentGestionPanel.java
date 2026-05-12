@@ -283,7 +283,7 @@ public class DocumentGestionPanel extends JPanel {
 		        List<Document> resultat = new DocumentDAO().rechercherParLangue(lgSource, lgCible);
 		        if (!resultat.isEmpty()) {
 		            panelAfficherDict.remplirTable(resultat);
-		            cardLayout.show(conteneur, "AFFICHERDICT"); // ← faute de frappe corrigée
+		            cardLayout.show(conteneur, "AFFICHERDICT"); 
 		        } else {
 		            JOptionPane.showMessageDialog(null, "Aucun dictionnaire trouvé");
 		        }
