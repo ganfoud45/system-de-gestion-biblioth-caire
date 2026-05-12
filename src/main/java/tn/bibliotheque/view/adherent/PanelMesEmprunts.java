@@ -85,10 +85,7 @@ public class PanelMesEmprunts extends JPanel {
 
           
 
-            // Afficher le nombre total
-            if (prets.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Vous n'avez aucun emprunt enregistré.");
-            }
+           
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erreur de chargement : " + e.getMessage());
