@@ -14,7 +14,7 @@ public class AdherentDAO implements IDAO<Adherent>{
 		Transaction tx=null;
 		try {
 			tx=s.beginTransaction();
-			s.merge(a);
+			s.persist(a);
 			tx.commit();
 			System.out.println("Insertion réussie dans la base !");
 		}catch (Exception e) {

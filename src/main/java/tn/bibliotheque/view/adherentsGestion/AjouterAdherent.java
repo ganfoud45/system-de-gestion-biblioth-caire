@@ -28,7 +28,7 @@ public class AjouterAdherent extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AjouterAdherent() {
+	public AjouterAdherent(AdhrentGestionPanel parent) {
 		this.parent = parent;
 		
 		setBackground(new Color(255, 255, 255));
@@ -132,10 +132,7 @@ public class AjouterAdherent extends JPanel {
 		
 		JButton confirmerBtn = new JButton("confirmer");
 		confirmerBtn.setFont(new Font("Dialog", Font.BOLD, 16));
-		confirmerBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		
 		confirmerBtn.setBounds(499, 484, 144, 43);
 		add(confirmerBtn);
 		

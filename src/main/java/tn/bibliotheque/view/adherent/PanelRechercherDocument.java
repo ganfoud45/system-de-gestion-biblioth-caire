@@ -27,7 +27,7 @@ public class PanelRechercherDocument extends JPanel {
         txtRecherche = new JTextField(20);
         panelRecherche.add(txtRecherche);
 
-        comboType = new JComboBox<>(new String[]{"Par Titre", "Par Auteur", "Par Mots-clés", "Par ISBN"});
+        comboType = new JComboBox<>(new String[]{"Par Titre", "Par Auteur", "Par Mots-clés", "Par ISBN", "Par "});
         panelRecherche.add(comboType);
 
         JButton btnChercher = new JButton("Chercher");

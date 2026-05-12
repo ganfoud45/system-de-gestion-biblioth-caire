@@ -27,6 +27,7 @@ public class PanelListeDocuments extends JPanel {
         JButton btnActualiser = new JButton("Actualiser");
         add(btnActualiser, BorderLayout.SOUTH);
         btnActualiser.addActionListener(e -> chargerDonnees());
+        
 
         chargerDonnees();
     }

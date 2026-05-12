@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 
 public class Adherent extends Utilisateur {
-	@Column(name="num_abonnement")
+	@Column(name="numabonnement")
     private Integer numAbonnement;
 
     // Constructors

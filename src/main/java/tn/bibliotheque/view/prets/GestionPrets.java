@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import tn.bibliotheque.view.Authentification;
 import tn.bibliotheque.view.BibliothecaireView;
 
 import javax.swing.JLabel;
@@ -133,6 +134,9 @@ public class GestionPrets extends JFrame {
 		});
 		btnvoirHP.setBounds(0, 246, 172, 40);
 		panelMenu.add(btnvoirHP);
+		JButton deconnexion = new JButton("Déconnexion");
+		deconnexion.setBounds(12, 493, 225, 44);
+		panelMenu.add(deconnexion);
 		
 		JButton back = new JButton("Retournner");
 		back.setFont(new Font("Serif", Font.BOLD, 13));
@@ -145,6 +149,17 @@ public class GestionPrets extends JFrame {
                 dash.setVisible(true);
 		});
 		});
+		deconnexion.addActionListener(e->{
+			Authentification access = new Authentification ();
+			access.setVisible(true);
+			
+			javax.swing.JFrame currentFrame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+		    
+		    if (currentFrame != null) {
+		        currentFrame.dispose(); // Ferme et libère les ressources de la fenêtre actuelle
+		    }
+		});
+			
 		
 	}
 }

@@ -140,7 +140,7 @@ public class AdhrentGestionPanel extends JPanel {
 		
 		AfficherAdherentsPanel panelAfficher = new AfficherAdherentsPanel();
 		JPanel SupprimerAdherents = new SupprimerAdherentPanel();
-		JPanel AjouterAdherent    = new AjouterAdherent();
+		JPanel AjouterAdherent    = new AjouterAdherent(this);
 
 		conteneur.add(Acceuil,          "ACCEUIL");
 		

@@ -2,6 +2,9 @@ package tn.bibliotheque.view.prets;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import tn.bibliotheque.view.Authentification;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Color;
@@ -63,25 +66,43 @@ public class GestionPretsPanel extends JPanel {
         JButton btnajouterP = new JButton("Ajouter Pret");
         btnajouterP.setFont(new Font("Serif", Font.BOLD, 12));
         btnajouterP.addActionListener(e -> cl.show(panelAction, "pageAjout"));
-        btnajouterP.setBounds(0, 39, 172, 40);
+        btnajouterP.setBounds(0, 25, 172, 40);
         panelMenu.add(btnajouterP);
 
         JButton btnannulerP = new JButton("Retourner Pret");
         btnannulerP.setFont(new Font("Serif", Font.BOLD, 12));
         btnannulerP.addActionListener(e -> cl.show(panelAction, "pageAnnuler"));
-        btnannulerP.setBounds(0, 109, 172, 40);
+        btnannulerP.setBounds(0, 90, 172, 40);
         panelMenu.add(btnannulerP);
 
         JButton btnmodifierP = new JButton("Modifier Pret");
         btnmodifierP.setFont(new Font("Serif", Font.BOLD, 12));
         btnmodifierP.addActionListener(e -> cl.show(panelAction, "pageModif"));
-        btnmodifierP.setBounds(0, 180, 172, 40);
+        btnmodifierP.setBounds(0, 148, 172, 40);
         panelMenu.add(btnmodifierP);
+      
+			
 
         JButton btnvoirHP = new JButton("Consulter les prets");
         btnvoirHP.setFont(new Font("Serif", Font.BOLD, 12));
         btnvoirHP.addActionListener(e -> cl.show(panelAction, "pageListe"));
-        btnvoirHP.setBounds(0, 246, 172, 40);
+        btnvoirHP.setBounds(0, 209, 172, 40);
         panelMenu.add(btnvoirHP);
+     
+      		
+      		JButton deconnexion = new JButton("Déconnexion");
+      		deconnexion.setBounds(0, 259, 172, 44);
+      		panelMenu.add(deconnexion);
+      		
+              deconnexion.addActionListener(e->{
+      			Authentification access = new Authentification ();
+      			access.setVisible(true);
+      			
+      			javax.swing.JFrame currentFrame = (javax.swing.JFrame) javax.swing.SwingUtilities.getWindowAncestor(this);
+      		    
+      		    if (currentFrame != null) {
+      		        currentFrame.dispose(); // Ferme et libère les ressources de la fenêtre actuelle
+      		    }
+      		});
     }
 }
