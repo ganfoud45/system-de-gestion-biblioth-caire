@@ -27,7 +27,7 @@ public class AfficherRevue extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AfficherRevue() {
+	public AfficherRevue(boolean edible) {
 		setBackground(new Color(255, 255, 255));
 		setLayout(null);
 		
@@ -49,7 +49,18 @@ public class AfficherRevue extends JPanel {
 			new String[] {
 				 "Id", "ISSN", "titre", "periodicité", "numRevue","datePub","numDoc","nbExmp","disponibilité"
 			}
-		));
+		)
+				{
+			public boolean isCellEditable(int row, int column) {
+
+		        if (!edible) {
+		            return false; // tout le tableau non éditable
+		        }
+
+		        // sinon certaines colonnes seulement
+		        return (column != 0 && column != 8);
+		    }
+				});
 		table.getColumnModel().getColumn(0).setPreferredWidth(20);
 		chargerTable();
 		

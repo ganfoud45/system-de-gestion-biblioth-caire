@@ -33,7 +33,7 @@ public class AfficherDictionnaires extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AfficherDictionnaires() {
+	public AfficherDictionnaires(boolean edible) {
 		setBackground(new Color(245, 255, 250));
 		setLayout(null);
 		
@@ -56,10 +56,17 @@ public class AfficherDictionnaires extends JPanel {
 				 "Id", "titre", "auteur", "LgSource", "LgCible","datePub", "NbrMots","numDoc","nbrExmp","disponibilité"
 			}) {
 				@Override
+				
 			    public boolean isCellEditable(int row, int column) {
-			        // La colonne 0 (Id) n'est pas modifiable, les autres le sont
-			        return (column != 0 && column!=8);
-			    }}
+
+					        if (!edible) {
+					            return false; // tout le tableau non éditable
+					        }
+
+					        // sinon certaines colonnes seulement
+					        return (column != 0 && column != 8);
+					    }
+			    }
 		);
 		table.getColumnModel().getColumn(0).setPreferredWidth(20);
 		

@@ -28,7 +28,7 @@ public class AfficherTheses extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AfficherTheses() {
+	public AfficherTheses(boolean edible) {
 		setBackground(new Color(255, 255, 255));
 		setLayout(null);
 		
@@ -50,7 +50,18 @@ public class AfficherTheses extends JPanel {
 			new String[] {
 				 "Id", "titre", "doamine", "directeur", "université", "annéeSout", "datePub","nbExmp","numDoc","disponibilité"
 			}
-		));
+		)
+				{
+			public boolean isCellEditable(int row, int column) {
+
+		        if (!edible) {
+		            return false; // tout le tableau non éditable
+		        }
+
+		        // sinon certaines colonnes seulement
+		        return (column != 0 && column != 8);
+		    }
+				});
 		table.getColumnModel().getColumn(0).setPreferredWidth(20);
 		
 		JScrollPane scrollPane = new JScrollPane(table);

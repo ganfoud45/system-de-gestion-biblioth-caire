@@ -27,7 +27,7 @@ public class AfficherLivres extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AfficherLivres() {
+	public AfficherLivres(boolean edible) {
 		setBackground(new Color(255, 255, 255));
 		setLayout(null);
 		
@@ -51,9 +51,14 @@ public class AfficherLivres extends JPanel {
 			})
 		 {
 			@Override
-		    public boolean isCellEditable(int row, int column) {
-		        // La colonne 0 (Id) n'est pas modifiable, les autres le sont
-		        return (column != 0 && column!=11);
+			public boolean isCellEditable(int row, int column) {
+
+		        if (!edible) {
+		            return false; // tout le tableau non éditable
+		        }
+
+		        // sinon certaines colonnes seulement
+		        return (column != 0 && column != 8);
 		    }}
 		);
 		table.getColumnModel().getColumn(0).setPreferredWidth(20);

@@ -54,10 +54,10 @@ public class AdherentAcces extends JFrame {
         panelAction.setLayout(cl);
 
         // --- LES 3 PAGES ---
-    	AfficherDictionnaires panelAfficherDict = new AfficherDictionnaires();
-		AfficherLivres        panelAfficherLiv  = new AfficherLivres();
-		AfficherRevue         panelAfficherRev  = new AfficherRevue();
-		AfficherTheses        panelAfficherThes = new AfficherTheses();
+    	AfficherDictionnaires panelAfficherDict = new AfficherDictionnaires(false);
+		AfficherLivres        panelAfficherLiv  = new AfficherLivres(false);
+		AfficherRevue         panelAfficherRev  = new AfficherRevue(false);
+		AfficherTheses        panelAfficherThes = new AfficherTheses(false);
         PanelRechercherDocument pnlRecherche = new PanelRechercherDocument();
         PanelListeDocuments pnlListe = new PanelListeDocuments();
         panelAction.add(pnlListe, "pageListe");
