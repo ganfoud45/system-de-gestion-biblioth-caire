@@ -142,10 +142,11 @@ public class AfficherLivres extends JPanel {
 	                    liv.getGenre(),
 	                    liv.getMotsCle(),
 	                    liv.getNbrPg(),
-	                    liv.getDatePub(),
-	                    liv.getNbrPg(),
-	                    liv.getNumDoc(),
 	                    liv.getNbExemplaire(),
+	                    liv.getDatePub(),
+	                    
+	                    liv.getNumDoc(),
+	                    
 	                    liv.isDisponible() ? "Oui" : "Non" // Plus lisible qu'un boolean
 	                });
 	            }

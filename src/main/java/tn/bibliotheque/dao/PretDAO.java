@@ -37,9 +37,13 @@ public class PretDAO implements IDAO<Pret> {
             s.persist(p);
             
             // Réduire le stock
-            document.setNbExemplaire(document.getNbExemplaire() - 1);
+         // Réduire le stock
+            int nouveauStock = document.getNbExemplaire() - 1;
+            document.setNbExemplaire(nouveauStock);
+            if (nouveauStock <= 0) {
+                document.setDisponible(false);
+            }
             s.merge(document);
-            
             tx.commit();
         } catch (Exception e) {
             if (tx != null) tx.rollback();
@@ -68,8 +72,10 @@ public class PretDAO implements IDAO<Pret> {
             tx = s.beginTransaction();
             Pret p = s.get(Pret.class, id);
             if (p != null) {
-                p.getDocument().setNbExemplaire(p.getDocument().getNbExemplaire() + 1);
-                s.merge(p.getDocument());
+            	Document doc = p.getDocument();
+            	doc.setNbExemplaire(doc.getNbExemplaire() + 1);
+            	doc.setDisponible(true); // remettre disponible dès qu'un exemplaire est rendu
+            	s.merge(doc);
                 s.remove(p);
             }
             tx.commit();

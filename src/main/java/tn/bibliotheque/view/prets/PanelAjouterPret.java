@@ -126,6 +126,7 @@ public class PanelAjouterPret extends JPanel {
 
         // 2. Vérification de la disponibilité (Optionnel mais conseillé)
         if (documentSelectionne.getNbExemplaire() <= 0) {
+        	
             JOptionPane.showMessageDialog(this, "Ce document n'a plus d'exemplaires disponibles.", "Stock épuisé", JOptionPane.WARNING_MESSAGE);
             return;
         }

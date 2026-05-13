@@ -63,7 +63,8 @@ public abstract class Document {
     public void setNomDoc(String nomDoc) { this.nomDoc = nomDoc; }
     public void setDatePub(String datePub) { this.datePub = datePub; }
     public void setDisponible(boolean disponible) { this.disponible = disponible; }
-    public void setNbExemplaire(int nbExemplaire) { this.nbExemplaire = nbExemplaire; }
+    public void setNbExemplaire(int nbExemplaire) { this.nbExemplaire = nbExemplaire;
+    this.disponible=(nbExemplaire==0)?false:true;}
     public void setType(String t) { this.type=t; }
 
 
