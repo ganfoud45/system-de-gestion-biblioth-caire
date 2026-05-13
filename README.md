@@ -12,7 +12,7 @@ Fonctionnalités :
 
 --> Gestion des livres :
 .Ajouter, modifier et supprimer un livre du catalogue
-.Rechercher un livre par titre, auteur ou ISBN
+.Rechercher un document par ces notions spécifiques 
 .Consulter la disponibilité d'un livre (disponible / emprunté)
 
 -->Gestion des adhérents :
@@ -24,6 +24,13 @@ Fonctionnalités :
 .Ajouter, modifier et supprimer un emprunt 
 .Enregistrer un emprunt (avec date de début et date de retour prévue)
 .Enregistrer le retour d'un livre
+
+
+Vues : 
+
+1.Bibliothécaire : gestion des documents, gestion des adhérents,gestion gestion des prets
+2.Adhérent       : Recherche un document , emprunter un document , consulter la liste des documents , retourner le document emprunté
+
 
 
 Technologies utilisées :
